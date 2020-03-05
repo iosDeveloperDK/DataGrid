@@ -181,97 +181,99 @@ export default function Header({ index, style }) {
                   }
                 }}
               >
-                {(() => {
-                  switch (data.type) {
-                    case 'checkbox':
-                      return <Checkbox className={classes.icon} />
-                    default:
-                      return <Typography>{data.title}</Typography>
-                  }
-                })()}
-                {data.sort && renderSorting(data.sort)}
-                {data.sort && !isSorting(data.sort) && (
-                  <ArrowUpwardIcon
-                    className={`${classes.sortHiddenIcon} ${classes.sortIcon}`}
-                  />
+                <div style={{ display: 'flex' }}>
+                  {(() => {
+                    switch (data.type) {
+                      case 'checkbox':
+                        return <Checkbox className={classes.icon} />
+                      default:
+                        return <Typography>{data.title}</Typography>
+                    }
+                  })()}
+                  {data.sort && renderSorting(data.sort)}
+                  {data.sort && !isSorting(data.sort) && (
+                    <ArrowUpwardIcon
+                      className={`${classes.sortHiddenIcon} ${classes.sortIcon}`}
+                    />
+                  )}
+                </div>
+                {data.search && (
+                  <IconButton
+                    className={classes.search}
+                    onClick={() => {
+                      console.log(searchState)
+                      setSearch({
+                        ...searchState,
+                        [data.sort]: {
+                          ...searchState[data.sort],
+                          open: !searchState[data.sort].open
+                        }
+                      })
+                    }}
+                  >
+                    <SearchIcon fontSize="small" />
+                  </IconButton>
                 )}
               </div>
-              {data.search && (
-                <IconButton
-                  className={classes.search}
-                  onClick={() => {
-                    console.log(searchState)
-                    setSearch({
-                      ...searchState,
-                      [data.sort]: {
-                        ...searchState[data.sort],
-                        open: !searchState[data.sort].open
-                      }
-                    })
-                  }}
-                >
-                  <SearchIcon fontSize="small" />
-                </IconButton>
-              )}
             </div>
           )
         })}
-      </div>
-      {searchData.map(({ id, left, width }) => {
-        const { open, search } = searchState[id]
-        if (open) {
-          return (
-            <Paper
-              key={id}
-              className={classes.searchPaper}
-              style={{
-                left: left,
-                width: width
-              }}
-            >
-              <TextField
-                variant="outlined"
-                size="small"
-                label="Search"
-                fullWidth
-                type="search"
-                value={search}
-                onChange={event => {
-                  setSearch({
-                    ...searchState,
-                    [id]: {
-                      ...searchState[id],
-                      search: event.target.value
-                    }
-                  })
-                }}
-              />
-              <div
+        {searchData.map(({ id, left, width }) => {
+          const { open, search } = searchState[id]
+          if (open) {
+            return (
+              <Paper
+                key={id}
+                className={classes.searchPaper}
                 style={{
-                  display: 'flex',
-                  paddingTop: '10px'
+                  left: left,
+                  width: width
                 }}
               >
-                <Button
+                <TextField
                   variant="outlined"
                   size="small"
-                  className={classes.searchButton}
-                  onClick={() => dispatch(searchFilterChange({ search, id }))}
+                  label="Search"
+                  fullWidth
+                  type="search"
+                  value={search}
+                  onChange={event => {
+                    setSearch({
+                      ...searchState,
+                      [id]: {
+                        ...searchState[id],
+                        search: event.target.value
+                      }
+                    })
+                  }}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    paddingTop: '10px'
+                  }}
                 >
-                  Search
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  className={classes.clearButton}
-                >
-                  Clear
-                </Button>
-              </div>
-            </Paper>
-          )
-        }
-      })}
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className={classes.searchButton}
+                    onClick={() => dispatch(searchFilterChange({ search, id }))}
+                  >
+                    Search
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    className={classes.clearButton}
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </Paper>
+            )
+          }
+        })}
+      </div>
     </>
   )
 }

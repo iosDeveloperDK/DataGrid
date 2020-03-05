@@ -17,35 +17,45 @@ const useStyles = makeStyles({
 })
 
 export default function Root() {
+  const classes = useStyles()
   const dispatch = useDispatch()
 
-  const { global, search } = useSelector(state => state.filter)
-  const classes = useStyles()
+  const { search } = useSelector(state => state.filter)
   const users = useSelector(state => state.data.users)
+  console.log(search)
 
+  // const usersSelector = createSelector(
+  //   state => state.sort.sort,
+  //   sort =>
+  //     _.filter(
+  //       _.orderBy(
+  //         users,
+  //         sort.map(sort => sort.type),
+  //         sort.map(sort => (sort.asc ? 'asc' : 'desc'))
+  //       ),
+  //       function(item) {
+  //         return search.reduce((acc, element) => {
+  //           if (
+  //             item[element.id]
+  //               .toString()
+  //               .toLowerCase()
+  //               .indexOf(element.search.toLowerCase()) > -1
+  //           ) {
+  //             return true
+  //           } else {
+  //             return false
+  //           }
+  //         }, true)
+  //       }
+  //     )
+  // )
   const usersSelector = createSelector(
     state => state.sort.sort,
     sort =>
-      _.filter(
-        _.orderBy(
-          users,
-          sort.map(sort => sort.type),
-          sort.map(sort => (sort.asc ? 'asc' : 'desc'))
-        ),
-        function(item) {
-          return search.reduce((acc, element) => {
-            if (
-              item[element.id]
-                .toString()
-                .toLowerCase()
-                .indexOf(element.search.toLowerCase()) > -1
-            ) {
-              return true
-            } else {
-              return false
-            }
-          }, true)
-        }
+      _.orderBy(
+        users,
+        sort.map(sort => sort.type),
+        sort.map(sort => (sort.asc ? 'asc' : 'desc'))
       )
   )
   const test = useSelector(usersSelector)

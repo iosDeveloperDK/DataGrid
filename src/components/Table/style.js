@@ -18,10 +18,13 @@ const useStyles = makeStyles({
   },
   column: {
     display: 'flex',
-    // border: '1px solid',
+
     justifyContent: 'flex-start',
     padding: theme.spacing(0.5, 0),
     background: '#fff',
+    '& div': {
+      border: '1px solid'
+    },
     '&.checkbox': {
       width: '60px'
     },
@@ -61,8 +64,8 @@ const useStyles = makeStyles({
     }
   },
   search: {
-    marginLeft: 'auto !important',
-    marginRight: '10px !important',
+    // marginLeft: 'auto !important',
+    // marginRight: '10px !important',
     '& svg': {
       // color: theme.palette.secondary.main
     }
@@ -81,6 +84,7 @@ const useStyles = makeStyles({
   sorted: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     '&:hover': {
       cursor: 'pointer',
       color: `${theme.palette.primary.main}90`
@@ -102,7 +106,7 @@ const useStyles = makeStyles({
     justifyContent: 'flex-start',
     padding: theme.spacing(0.5, 0),
     background: '#fff',
-
+    border: '1px solid',
     flexShrink: 0,
     '& p': {
       whiteSpace: 'nowrap',
@@ -168,7 +172,8 @@ const useStyles = makeStyles({
     }
   },
   searchPaper: {
-    position: 'sticky',
+    position: 'absolute',
+    top: '60px',
     zIndex: 3,
     boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.3) !important`,
     padding: '8px',
