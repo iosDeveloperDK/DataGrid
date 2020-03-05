@@ -126,28 +126,23 @@ export default function List({ data }) {
   // )
 
   return (
-    data.length && (
-      <>
-        <FixedSizeList
-          outerRef={containerRef}
-          onScroll={scroll => {
-            // dispatch(changeRowOffset(scroll))
-          }}
-          height={550}
-          itemSize={56}
-          innerElementType={innerElementType}
-          itemCount={data.length}
-          width={1200}
-          itemData={{ ...data }}
-        >
-          {data => {
-            {
-              /* if (data.index === 0) return null */
-            }
-            return <Row {...data} />
-          }}
-        </FixedSizeList>
-      </>
-    )
+    <>
+      <FixedSizeList
+        outerRef={containerRef}
+        onScroll={scroll => {
+          // dispatch(changeRowOffset(scroll))
+        }}
+        height={550}
+        itemSize={56}
+        innerElementType={innerElementType}
+        itemCount={data.length}
+        width={1200}
+        itemData={{ ...data }}
+      >
+        {data => {
+          return <Row {...data} />
+        }}
+      </FixedSizeList>
+    </>
   )
 }

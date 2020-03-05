@@ -14,13 +14,11 @@ const useStyles = makeStyles({
     '& div p': {
       fontSize: '11px'
     },
-    '& div:hover svg': {
-      opacity: 0.5
-    },
     userSelect: 'none'
   },
   column: {
     display: 'flex',
+    // border: '1px solid',
     justifyContent: 'flex-start',
     padding: theme.spacing(0.5, 0),
     background: '#fff',
@@ -31,7 +29,7 @@ const useStyles = makeStyles({
       width: '70px'
     },
     '&.name': {
-      padding: '0 10px',
+      paddingLeft: '10px',
       width: '180px'
     },
     '&.car': {
@@ -62,6 +60,13 @@ const useStyles = makeStyles({
       color: 'inherit'
     }
   },
+  search: {
+    marginLeft: 'auto !important',
+    marginRight: '10px !important',
+    '& svg': {
+      // color: theme.palette.secondary.main
+    }
+  },
   sortIcon: {
     marginLeft: theme.spacing(0.5),
     marginTop: '-2px',
@@ -79,16 +84,14 @@ const useStyles = makeStyles({
     '&:hover': {
       cursor: 'pointer',
       color: `${theme.palette.primary.main}90`
+    },
+    '&:hover svg': {
+      opacity: 0.5
     }
   },
   row: {
     display: 'flex',
     alignItems: 'center'
-
-    // '& div': {
-    //   flexBasis: 'calc(100% / 8)'
-    // }
-    // borderBottom: '1px solid black'
   },
   rowAvatar: {
     height: '30px !important',
@@ -163,6 +166,25 @@ const useStyles = makeStyles({
       fontSize: '14px',
       fontWeight: 300
     }
+  },
+  searchPaper: {
+    position: 'sticky',
+    zIndex: 3,
+    boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.3) !important`,
+    padding: '8px',
+    background: 'white'
+  },
+  searchButton: {
+    flexGrow: 1,
+    marginRight: '5px !important',
+    color: `${theme.palette.secondary.main} !important`,
+    borderColor: `${theme.palette.secondary.main} !important`
+  },
+  clearButton: {
+    flexGrow: 1,
+    marginLeft: '5px !important',
+    color: `${theme.palette.secondary.clear} !important`,
+    borderColor: `${theme.palette.secondary.clear} !important`
   }
 })
 
