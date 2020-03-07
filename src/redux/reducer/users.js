@@ -1,7 +1,8 @@
 import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS,
-  DELETE_USERS
+  DELETE_USERS,
+  SELECT_ALL_USERS
 } from '../../config/constants'
 import _ from 'lodash'
 
@@ -16,6 +17,8 @@ export default (state = defaultState, { type, payload }) => {
       return { ...state, isLoading: true }
     case FETCH_USERS_SUCCESS:
       return { ...state, users: payload, isLoading: false }
+    case SELECT_ALL_USERS:
+      return { ...state, selectedRows: payload }
     case DELETE_USERS:
       return {
         ...state,

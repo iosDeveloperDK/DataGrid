@@ -8,8 +8,6 @@ export default (state = defaultState, { type, payload }) => {
   switch (type) {
     case TABLE_CHANGE_OFFSET:
       return { ...state, offsetLeft: payload }
-    case TABLE_SELECT_ALL:
-      return { ...state, selectedRows: payload }
     default:
       return state
   }

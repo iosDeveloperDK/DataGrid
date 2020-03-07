@@ -4,7 +4,6 @@ import { TextField } from '@material-ui/core'
 
 export default function TextFieldFilter({ onChange, value }) {
   const classes = styles()
-  console.log(122222, value)
 
   return (
     <TextField

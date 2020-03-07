@@ -6,7 +6,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { selectAllRow } from '../../../../redux/action/table'
+import { selectAllUsers } from '../../../../redux/action/users'
 import RemoveIcon from '@material-ui/icons/Remove'
 export default function HeaderTitle({
   sort,
@@ -17,7 +17,7 @@ export default function HeaderTitle({
 }) {
   const classes = styles()
   const { sort: sortes } = useSelector(state => state.sort)
-  const { selectedRows } = useSelector(state => state.table)
+  const { selectedRows } = useSelector(state => state.data)
   const dispatch = useDispatch()
 
   const renderSorting = type => {
@@ -55,7 +55,7 @@ export default function HeaderTitle({
               <Checkbox
                 className={classes.icon}
                 onClick={() => {
-                  dispatch(selectAllRow(!selectedRows))
+                  dispatch(selectAllUsers(!selectedRows))
                 }}
                 checked={selectedRows}
               />

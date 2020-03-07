@@ -4,7 +4,8 @@ import users from '../../data/users.js'
 import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS,
-  DELETE_USERS
+  DELETE_USERS,
+  SELECT_ALL_USERS
 } from '../../config/constants'
 
 export const fetchUsers = (since = 0) => {
@@ -33,5 +34,12 @@ export const deleteUsers = users => {
   return {
     type: DELETE_USERS,
     payload: users
+  }
+}
+
+export const selectAllUsers = select => {
+  return {
+    type: SELECT_ALL_USERS,
+    payload: select
   }
 }

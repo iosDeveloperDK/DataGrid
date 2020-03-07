@@ -21,7 +21,7 @@ export default function List({ data }) {
   const containerRef = useRef()
   const { virtualization } = useSelector(state => state.settings)
   const [selectedRow, setSelectRow] = useState([])
-  const { selectedRows } = useSelector(state => state.table)
+  const { selectedRows } = useSelector(state => state.data)
 
   useEffect(() => {
     if (selectedRows) {
@@ -39,7 +39,12 @@ export default function List({ data }) {
     if (containerRef.current) {
       containerRef.current.addEventListener('scroll', handleScroll)
     }
-  })
+
+    return function cleanup() {
+      // containerRef.current.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+  console.log('render list')
 
   return (
     <>
@@ -54,7 +59,7 @@ export default function List({ data }) {
           itemData={{ ...data }}
         >
           {data => {
-            if (data.index == 0) {
+            if (data.index === 0) {
               return null
             } else {
               const correctIndex = data.index - 1

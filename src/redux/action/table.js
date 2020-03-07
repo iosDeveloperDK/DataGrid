@@ -6,10 +6,3 @@ export const changeRowOffset = offset => {
     payload: offset
   }
 }
-
-export const selectAllRow = select => {
-  return {
-    type: TABLE_SELECT_ALL,
-    payload: select
-  }
-}
