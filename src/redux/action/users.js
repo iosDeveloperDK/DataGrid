@@ -3,8 +3,8 @@
 import users from '../../data/users.js'
 import {
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_ERROR,
-  FETCH_USERS
+  FETCH_USERS,
+  DELETE_USERS
 } from '../../config/constants'
 
 export const fetchUsers = (since = 0) => {
@@ -13,14 +13,6 @@ export const fetchUsers = (since = 0) => {
     setTimeout(() => {
       dispatch(fetchSuccess(users))
     }, 0)
-    // axios
-    //   .get(`${api}/users?since=${since}`)
-    //   .then(users => {
-    //     dispatch(fetchSuccess(users))
-    //   })
-    //   .catch(error => {
-    //     dispatch(fetchError(error))
-    //   })
   }
 }
 
@@ -37,9 +29,9 @@ function fetchSuccess(users) {
   }
 }
 
-function fetchError(message) {
+export const deleteUsers = users => {
   return {
-    type: FETCH_USERS_ERROR,
-    payload: message
+    type: DELETE_USERS,
+    payload: users
   }
 }

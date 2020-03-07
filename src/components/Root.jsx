@@ -27,33 +27,6 @@ export default function Root() {
   )
   const users = useSelector(state => state.data.users)
 
-  // const usersSelector = createSelector(
-  //   state => state.sort.sort,
-  //   sort =>
-  //     _.filter(
-  //       _.orderBy(
-  //         users,
-  //         sort.map(sort => sort.type),
-  //         sort.map(sort => (sort.asc ? 'asc' : 'desc'))
-  //       ),
-  //       function(item) {
-  //         return search.reduce((acc, element) => {
-  //           if (
-  //             item[element.id]
-  //               .toString()
-  //               .toLowerCase()
-  //               .indexOf(element.search.toLowerCase()) > -1
-  //           ) {
-  //             return true
-  //           } else {
-  //             return false
-  //           }
-  //         }, true)
-  //       }
-  //     )
-  // )
-  console.log('filter', filter)
-
   const usersSelector = createSelector(
     state => state.sort.sort,
     sort =>
@@ -64,24 +37,31 @@ export default function Root() {
           sort.map(sort => (sort.asc ? 'asc' : 'desc'))
         ),
         item => {
+          let filterBool = true
+          let fieldBool = true
+          let enumBool = true
+          let toggleBool = true
+
           if (!_.isEmpty(filter)) {
-            return _.some(item, value => {
+            filterBool = _.some(item, value => {
               return _.includes(
                 value.toString().toLowerCase(),
                 filter.toLowerCase()
               )
             })
-          } else if (!_.isEmpty(field)) {
-            return _.isMatchWith(item, field, customizer)
-          } else if (!_.isEmpty(enumFilter)) {
-            return _.some(item, value => {
+          }
+          if (!_.isEmpty(field)) {
+            fieldBool = _.isMatchWith(item, field, customizer)
+          }
+          if (!_.isEmpty(enumFilter)) {
+            enumBool = _.some(item, value => {
               return _.includes(enumFilter, value)
             })
-          } else if (toggle !== null) {
-            return _.isMatch(item, { isOnline: toggle })
-          } else {
-            return true
           }
+          if (toggle !== null) {
+            toggleBool = _.isMatch(item, { isOnline: toggle })
+          }
+          return filterBool && fieldBool && enumBool && toggleBool
         }
       )
   )
@@ -90,6 +70,7 @@ export default function Root() {
   useEffect(() => {
     dispatch(fetchUsers())
   }, [])
+  console.log('render root')
 
   return (
     <div

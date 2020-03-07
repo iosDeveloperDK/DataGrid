@@ -24,7 +24,7 @@ export default function GlobalFilter() {
       <Grid item container spacing={2}>
         <Grid item sm={5}>
           <TextFieldFilter
-            onChange={({ value }) => {
+            onChange={value => {
               setFilter(value)
             }}
           />

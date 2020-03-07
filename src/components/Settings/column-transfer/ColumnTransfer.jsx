@@ -7,6 +7,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Checkbox from '@material-ui/core/Checkbox'
 import { Typography, TextField, Grid } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
+import { settingsColumnsChange } from '../../../redux/action/settings'
+import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,19 +29,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const columns = [
-  { id: 'avatar', title: 'Avatar' },
-  { id: 'name', title: 'Name' },
-  { id: 'car', title: 'Car' },
-  { id: 'type', title: 'Type' },
-  { id: 'price', title: 'Price' },
-  { id: 'online', title: 'Online' },
-  { id: 'date', title: 'Date' },
-  { id: 'text', title: 'Text' }
-]
-
 export default function ColumnTransfer() {
   const classes = useStyles()
+  const dispatch = useDispatch()
+  const { columns } = useSelector(state => state.settings)
+
+  const checkboxChange = title => {
+    var newColumns = _.map(columns, column => {
+      return column.title === title
+        ? { ...column, display: !column.display }
+        : column
+    })
+    dispatch(settingsColumnsChange(newColumns))
+  }
 
   return (
     <Grid container>
@@ -48,11 +51,17 @@ export default function ColumnTransfer() {
         </Typography>
       </Grid>
       <Grid item container>
-        {columns.map(({ id, title }) => (
-          <Grid item sm={2}>
+        {columns.map(({ title, display }) => (
+          <Grid item sm={2} key={title}>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox className={classes.checkbox} />}
+                control={
+                  <Checkbox
+                    className={classes.checkbox}
+                    checked={display}
+                    onClick={() => checkboxChange(title)}
+                  />
+                }
                 className={classes.label}
                 label={
                   <Typography className={classes.label}>{title}</Typography>

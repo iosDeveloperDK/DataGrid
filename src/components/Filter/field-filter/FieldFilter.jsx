@@ -8,7 +8,7 @@ import { fieldFilterChange } from '../../../redux/action/filter'
 export default function FieldFilter() {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
-  const [field, setField] = useState(null)
+  const [field, setField] = useState('')
   const selectOptions = [
     { label: 'Name', value: 'name' },
     { label: 'Car', value: 'car' },
@@ -35,7 +35,7 @@ export default function FieldFilter() {
         <Grid item sm={5}>
           <TextFieldFilter
             value={filter}
-            onChange={({ value }) => {
+            onChange={value => {
               setFilter(value)
             }}
           />
@@ -44,8 +44,8 @@ export default function FieldFilter() {
           <SelectFilter
             selectOptions={selectOptions}
             value={field}
-            onChange={field => {
-              setField(field)
+            onChange={({ value }) => {
+              setField(value)
             }}
             onClear={() => {
               setFilter('')
