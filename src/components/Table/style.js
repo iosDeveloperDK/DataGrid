@@ -18,41 +18,10 @@ const useStyles = makeStyles({
   },
   column: {
     display: 'flex',
-
-    justifyContent: 'flex-start',
-    padding: theme.spacing(0.5, 0),
-    background: '#fff',
-    '& div': {
-      border: '1px solid'
-    },
-    '&.checkbox': {
-      width: '60px'
-    },
-    '&.avatar': {
-      width: '70px'
-    },
-    '&.name': {
-      paddingLeft: '10px',
-      width: '180px'
-    },
-    '&.car': {
-      width: '150px'
-    },
-    '&.type': {
-      width: '150px'
-    },
-    '&.price': {
-      width: '100px'
-    },
-    '&.online': {
-      width: '100px'
-    },
-    '&.date': {
-      width: '150px'
-    },
-    '&.text': {
-      width: '600px'
-    }
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: theme.spacing(0, 1),
+    background: '#fff'
   },
   checkbox: {
     width: '60px'
@@ -63,11 +32,13 @@ const useStyles = makeStyles({
       color: 'inherit'
     }
   },
-  search: {
-    // marginLeft: 'auto !important',
-    // marginRight: '10px !important',
-    '& svg': {
-      // color: theme.palette.secondary.main
+  title: {
+    '&:hover': {
+      cursor: 'pointer',
+      color: `${theme.palette.primary.main}90`
+    },
+    '&:hover svg': {
+      opacity: 0.5
     }
   },
   sortIcon: {
@@ -81,18 +52,6 @@ const useStyles = makeStyles({
   sortHiddenIcon: {
     opacity: 0
   },
-  sorted: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    '&:hover': {
-      cursor: 'pointer',
-      color: `${theme.palette.primary.main}90`
-    },
-    '&:hover svg': {
-      opacity: 0.5
-    }
-  },
   row: {
     display: 'flex',
     alignItems: 'center'
@@ -103,10 +62,10 @@ const useStyles = makeStyles({
   },
   rowValue: {
     display: 'flex',
+    color: theme.palette.text.main,
     justifyContent: 'flex-start',
-    padding: theme.spacing(0.5, 0),
+    padding: theme.spacing(0.5, 1),
     background: '#fff',
-    border: '1px solid',
     flexShrink: 0,
     '& p': {
       whiteSpace: 'nowrap',
@@ -116,14 +75,14 @@ const useStyles = makeStyles({
       fontWeight: 300
     },
     '&.checkbox': {
-      width: '60px'
+      // width: '60px'
     },
     '&.avatar': {
       width: '70px'
     },
     '&.name': {
       padding: '0 10px',
-      width: '180px'
+      width: '176px'
     },
     '&.car': {
       width: '150px'
@@ -136,7 +95,7 @@ const useStyles = makeStyles({
       color: '#46d3ce'
     },
     '&.online': {
-      width: '88px',
+      width: '56px',
       paddingLeft: '12px',
       '& span': {
         width: '14px',
@@ -157,7 +116,7 @@ const useStyles = makeStyles({
       color: '#ff619d'
     },
     '&.text': {
-      width: '600px'
+      width: '536px'
     }
     // color: '#81a4fb'
   },
@@ -170,26 +129,6 @@ const useStyles = makeStyles({
       fontSize: '14px',
       fontWeight: 300
     }
-  },
-  searchPaper: {
-    position: 'absolute',
-    top: '60px',
-    zIndex: 3,
-    boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.3) !important`,
-    padding: '8px',
-    background: 'white'
-  },
-  searchButton: {
-    flexGrow: 1,
-    marginRight: '5px !important',
-    color: `${theme.palette.secondary.main} !important`,
-    borderColor: `${theme.palette.secondary.main} !important`
-  },
-  clearButton: {
-    flexGrow: 1,
-    marginLeft: '5px !important',
-    color: `${theme.palette.secondary.clear} !important`,
-    borderColor: `${theme.palette.secondary.clear} !important`
   }
 })
 

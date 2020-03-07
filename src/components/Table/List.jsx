@@ -35,11 +35,11 @@ export default function List({ data }) {
     <>
       <FixedSizeList
         outerRef={containerRef}
-        height={550}
+        height={828}
         itemSize={56}
         innerElementType={innerElementType}
         itemCount={data.length}
-        width={1200}
+        width={1287}
         itemData={{ ...data }}
       >
         {data => {

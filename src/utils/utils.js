@@ -44,3 +44,10 @@ export const doFilter = (values, filter, fields = ['login', 'type']) => {
       .find(element => element.toString().includes(lowerCaseFilter))
   )
 }
+
+export const customizer = (objValue, srcValue) => {
+  return objValue
+    .toString()
+    .toLowerCase()
+    .includes(srcValue.toLowerCase())
+}

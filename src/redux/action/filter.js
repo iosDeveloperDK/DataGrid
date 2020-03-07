@@ -1,7 +1,16 @@
 import {
   FILTER_GLOBAL_CHANGE,
-  FILTER_SEARCH_CHANGE
+  FILTER_ENUM_CHANGE,
+  FILTER_FIELD_CHANGE,
+  FILTER_TOGGLE_CHANGE
 } from '../../config/constants'
+
+export const fieldFilterChange = field => {
+  return {
+    type: FILTER_FIELD_CHANGE,
+    payload: field
+  }
+}
 
 export const globalFilterChange = filter => {
   return {
@@ -10,9 +19,16 @@ export const globalFilterChange = filter => {
   }
 }
 
-export const searchFilterChange = filter => {
+export const enumFilterChange = filter => {
   return {
-    type: FILTER_SEARCH_CHANGE,
+    type: FILTER_ENUM_CHANGE,
+    payload: filter
+  }
+}
+
+export const toggleFilterChange = filter => {
+  return {
+    type: FILTER_TOGGLE_CHANGE,
     payload: filter
   }
 }

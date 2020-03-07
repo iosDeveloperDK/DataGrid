@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 export default ({ index, style, data, offset }) => {
   let offsetLeft = useSelector(state => state.table.offsetLeft)
   // console.log(offset)
-  offsetLeft = offsetLeft > 130 ? offsetLeft - 130 : 0
+  offsetLeft = offsetLeft > 144 ? offsetLeft - 144 : 0
   const classes = styles()
   const user = data[index]
 
