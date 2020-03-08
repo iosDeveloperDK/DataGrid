@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, TextField, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import SelectFilter from '../select-filter/SelectFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import { enumFilterChange } from '../../../redux/action/filter'

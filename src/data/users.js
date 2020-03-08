@@ -15,7 +15,7 @@ const makeData = id => {
     ],
     avatar: Faker.image.avatar(),
     price: Faker.random.number({ min: -100000, max: 100000 }),
-    lorem: Faker.lorem.paragraph(),
+    text: Faker.lorem.paragraph(),
     car: [
       'Seat',
       'Audi',

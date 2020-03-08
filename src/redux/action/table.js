@@ -1,4 +1,4 @@
-import { TABLE_CHANGE_OFFSET, TABLE_SELECT_ALL } from '../../config/constants'
+import { TABLE_CHANGE_OFFSET } from '../../config/constants'
 
 export const changeRowOffset = offset => {
   return {

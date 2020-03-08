@@ -7,18 +7,21 @@ const defaultState = {
   virtualization: true,
   columns: JSON.parse(localStorage.getItem('columns')) || [
     {
+      id: 'checkbox',
       title: 'CHECKBOX',
       type: 'checkbox',
-      width: '60px',
+      width: '50px',
       display: true
     },
     {
+      id: 'avatar',
       title: 'AVATAR',
       type: 'text',
       width: '60px',
       display: true
     },
     {
+      id: 'name',
       title: 'NAME',
       type: 'text',
       sort: 'name',
@@ -27,6 +30,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'car',
       title: 'CAR',
       type: 'text',
       sort: 'car',
@@ -34,6 +38,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'type',
       title: 'TYPE',
       type: 'text',
       sort: 'type',
@@ -41,6 +46,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'price',
       title: 'PRICE',
       type: 'text',
       sort: 'price',
@@ -48,6 +54,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'isOnline',
       title: 'ONLINE',
       type: 'text',
       sort: 'isOnline',
@@ -55,6 +62,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'date',
       title: 'DATE',
       type: 'text',
       sort: 'date',
@@ -62,6 +70,7 @@ const defaultState = {
       display: true
     },
     {
+      id: 'text',
       title: 'TEXT',
       type: 'text',
       sort: 'text',

@@ -13,17 +13,19 @@ export const fieldFilterChange = field => {
   }
 }
 
-export const globalFilterChange = filter => {
+export const globalFilterChange = (filter, save = true) => {
   return {
     type: FILTER_GLOBAL_CHANGE,
-    payload: filter
+    payload: filter,
+    save
   }
 }
 
-export const enumFilterChange = filter => {
+export const enumFilterChange = (filter, save = true) => {
   return {
     type: FILTER_ENUM_CHANGE,
-    payload: filter
+    payload: filter,
+    save
   }
 }
 

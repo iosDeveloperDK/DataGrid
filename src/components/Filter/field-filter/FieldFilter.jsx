@@ -42,8 +42,6 @@ export default function FieldFilter() {
     }
   }, [object])
 
-  console.log('redndet', filter, field, _.find(selectOptions, { value: field }))
-
   return (
     <Grid container>
       <Grid item sm={12}>

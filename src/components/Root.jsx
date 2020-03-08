@@ -3,14 +3,14 @@ import _ from 'lodash'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUsers } from '../redux/action/users'
 import List from './Table/List'
-import { doSort, doFilter, customizer } from '../utils/utils'
+import { customizer } from '../utils/utils'
 import { Paper, Grid, Box, Typography } from '@material-ui/core'
-
 import { makeStyles } from '@material-ui/core/styles'
-import theme from '../config/theme'
 import { createSelector } from 'reselect'
 import Filter from './Filter/Filter'
 import Settings from './Settings/Settings'
+import { useLocation } from 'react-router-dom'
+import { enumFilterChange, globalFilterChange } from '../redux/action/filter'
 
 const useStyles = makeStyles({
   paper: {
@@ -18,14 +18,20 @@ const useStyles = makeStyles({
   }
 })
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+
 export default function Root() {
   const classes = useStyles()
   const dispatch = useDispatch()
+  let query = useQuery()
 
   const { field, filter, enum: enumFilter, toggle } = useSelector(
     state => state.filter
   )
   const users = useSelector(state => state.data.users)
+  const router = useSelector(state => state.router)
 
   const usersSelector = createSelector(
     state => state.sort.sort,
@@ -70,7 +76,15 @@ export default function Root() {
   useEffect(() => {
     dispatch(fetchUsers())
   }, [])
-  console.log('render root')
+
+  useEffect(() => {
+    if (query.get('enum')) {
+      dispatch(enumFilterChange(query.get('enum'), false))
+    }
+    if (query.get('text')) {
+      dispatch(globalFilterChange(query.get('text'), false))
+    }
+  }, [router])
 
   return (
     <div
@@ -98,7 +112,7 @@ export default function Root() {
               style={{ overflow: 'hidden', height: '100%', marginRight: '8px' }}
             >
               <Filter />
-              <Settings />
+              <Settings data={test} />
             </Paper>
           </Grid>
           <Grid item sm={8}>

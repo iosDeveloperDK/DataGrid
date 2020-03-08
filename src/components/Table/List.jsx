@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FixedSizeList } from 'react-window'
 import Header from './Header'
 import Row from './row/Row'
@@ -7,18 +7,18 @@ import { changeRowOffset } from '../../redux/action/table'
 import _ from 'lodash'
 import TableSnackbar from '../snackbar/TableSnackbar'
 import { deleteUsers } from '../../redux/action/users'
-import { TransitionGroup } from 'react-transition-group'
 
-const InnerElementType = ({ children, ...rest }) => (
-  <div {...rest}>
-    <Header />
-    {children}
-  </div>
-)
+const InnerElementType = ({ children, ...rest }) => {
+  return (
+    <div {...rest}>
+      <Header />
+      {children}
+    </div>
+  )
+}
 
 export default function List({ data }) {
   const dispatch = useDispatch()
-  const containerRef = useRef()
   const { virtualization } = useSelector(state => state.settings)
   const [selectedRow, setSelectRow] = useState([])
   const { selectedRows } = useSelector(state => state.data)
@@ -31,31 +31,18 @@ export default function List({ data }) {
     }
   }, [selectedRows])
 
-  // useEffect(() => {
-  //   function handleScroll(evt) {
-  //     dispatch(changeRowOffset(this.scrollLeft))
-  //   }
-
-  //   if (containerRef.current) {
-  //     containerRef.current.addEventListener('scroll', handleScroll)
-  //   }
-
-  //   return function cleanup() {
-  //     // containerRef.current.removeEventListener('scroll', handleScroll)
-  //   }
-  // }, [])
-  console.log('render list')
-
   return (
     <>
       {virtualization ? (
         <FixedSizeList
-          // outerRef={containerRef}
+          onScroll={scroll => {
+            dispatch(changeRowOffset(scroll.scrollOffset))
+          }}
           height={828}
           itemSize={56}
           innerElementType={InnerElementType}
           itemCount={data.length + 1}
-          width={1287}
+          width={1282}
           itemData={{ ...data }}
         >
           {data => {
@@ -63,6 +50,7 @@ export default function List({ data }) {
               return null
             } else {
               const correctIndex = data.index - 1
+
               return (
                 <Row
                   {...data}
@@ -114,7 +102,7 @@ export default function List({ data }) {
         <div style={{ height: '828px', overflowY: 'scroll' }}>
           <InnerElementType>
             {data.map((user, index) => (
-              <Row key={index} index={index} style={{}} data={data} />
+              <Row key={index} correctIndex={index} style={{}} data={data} />
             ))}
           </InnerElementType>
         </div>

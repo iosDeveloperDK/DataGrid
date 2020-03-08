@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, TextField, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 import SwitchFilter from '../../Filter/switch-filter/SwitchFilter'
 import { useDispatch } from 'react-redux'
 import { settingsVirtualizationChange } from '../../../redux/action/settings'

@@ -3,11 +3,10 @@ import styles from './style'
 import _ from 'lodash'
 import SearchIcon from '@material-ui/icons/Search'
 import HeaderSearch from './HeaderSearch'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function HeaderSearchIcon({ sort, handleClick, width }) {
   const classes = styles()
-  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const { search } = useSelector(state => state.filter)
   const isSort = _.find(search, { id: sort })

@@ -7,7 +7,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectAllUsers } from '../../../../redux/action/users'
-import RemoveIcon from '@material-ui/icons/Remove'
+
 export default function HeaderTitle({
   sort,
   type,

@@ -13,16 +13,20 @@ const defaultState = {
   toggle: JSON.parse(localStorage.getItem('toggle'))
 }
 
-export default (state = defaultState, { type, payload }) => {
+export default (state = defaultState, { type, payload, save }) => {
   switch (type) {
     case FILTER_FIELD_CHANGE:
       localStorage.setItem('field', JSON.stringify(payload))
       return { ...state, field: payload }
     case FILTER_GLOBAL_CHANGE:
-      localStorage.setItem('filter', JSON.stringify(payload))
+      if (save) {
+        localStorage.setItem('filter', JSON.stringify(payload))
+      }
       return { ...state, filter: payload }
     case FILTER_ENUM_CHANGE:
-      localStorage.setItem('enum', JSON.stringify(payload))
+      if (save) {
+        localStorage.setItem('enum', JSON.stringify(payload))
+      }
       return { ...state, enum: payload }
     case FILTER_TOGGLE_CHANGE:
       localStorage.setItem('toggle', JSON.stringify(payload))
