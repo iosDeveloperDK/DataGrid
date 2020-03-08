@@ -9,7 +9,7 @@ import ToggleVirtualization from './toggle-virtualization/ToggleVirtualization'
 
 export default function Settings() {
   return (
-    <Grid container direction="column" style={{ padding: '16px' }} spacing={2}>
+    <Grid container direction="column" style={{ padding: '16px' }} spacing={1}>
       <Grid item sm={12}>
         <Box color="text.main">
           <Typography variant="h5">SETTINGS</Typography>

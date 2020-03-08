@@ -31,26 +31,26 @@ export default function List({ data }) {
     }
   }, [selectedRows])
 
-  useEffect(() => {
-    function handleScroll(evt) {
-      dispatch(changeRowOffset(this.scrollLeft))
-    }
+  // useEffect(() => {
+  //   function handleScroll(evt) {
+  //     dispatch(changeRowOffset(this.scrollLeft))
+  //   }
 
-    if (containerRef.current) {
-      containerRef.current.addEventListener('scroll', handleScroll)
-    }
+  //   if (containerRef.current) {
+  //     containerRef.current.addEventListener('scroll', handleScroll)
+  //   }
 
-    return function cleanup() {
-      // containerRef.current.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  //   return function cleanup() {
+  //     // containerRef.current.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [])
   console.log('render list')
 
   return (
     <>
       {virtualization ? (
         <FixedSizeList
-          outerRef={containerRef}
+          // outerRef={containerRef}
           height={828}
           itemSize={56}
           innerElementType={InnerElementType}

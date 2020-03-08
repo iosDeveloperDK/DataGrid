@@ -5,7 +5,7 @@ import {
 
 const defaultState = {
   virtualization: true,
-  columns: [
+  columns: JSON.parse(localStorage.getItem('columns')) || [
     {
       title: 'CHECKBOX',
       type: 'checkbox',
@@ -15,7 +15,7 @@ const defaultState = {
     {
       title: 'AVATAR',
       type: 'text',
-      width: '70px',
+      width: '60px',
       display: true
     },
     {
@@ -30,21 +30,21 @@ const defaultState = {
       title: 'CAR',
       type: 'text',
       sort: 'car',
-      width: '150px',
+      width: '110px',
       display: true
     },
     {
       title: 'TYPE',
       type: 'text',
       sort: 'type',
-      width: '150px',
+      width: '80px',
       display: true
     },
     {
       title: 'PRICE',
       type: 'text',
       sort: 'price',
-      width: '100px',
+      width: '80px',
       display: true
     },
     {
@@ -76,6 +76,7 @@ export default (state = defaultState, { type, payload }) => {
     case SETTINGS_VIRTUALIZATION:
       return { ...state, virtualization: payload }
     case SETTINGS_TABLE_COLUMNS:
+      localStorage.setItem('columns', JSON.stringify(payload))
       return { ...state, columns: payload }
     default:
       return state

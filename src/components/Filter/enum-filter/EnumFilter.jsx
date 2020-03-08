@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Typography, TextField, Grid } from '@material-ui/core'
 import SelectFilter from '../select-filter/SelectFilter'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { enumFilterChange } from '../../../redux/action/filter'
+import _ from 'lodash'
 
 export default function EnumFilter() {
   const dispatch = useDispatch()
-  const [filter, setFilter] = useState([])
+  const { enum: object } = useSelector(state => state.filter)
+
+  const [filter, setFilter] = useState(object)
   const selectOptions = [
     { label: 'Admin', value: 'Admin' },
     { label: 'Student', value: 'Student' },
@@ -33,6 +36,9 @@ export default function EnumFilter() {
         <Grid item sm={12}>
           <SelectFilter
             selectOptions={selectOptions}
+            value={selectOptions.filter(option =>
+              object.includes(option.value)
+            )}
             isMulti
             onChange={filter => {
               if (filter) {
@@ -42,7 +48,7 @@ export default function EnumFilter() {
               }
             }}
             onClear={() => {
-              console.log('clear')
+              setFilter([])
             }}
           />
         </Grid>

@@ -65,8 +65,8 @@ export default function Header({ index, style }) {
               <div
                 key={data.title}
                 style={{
-                  position: 'relative',
-                  left: data.static ? `${offsetLeft}px` : '0px',
+                  position: data.static ? 'sticky' : 'relative',
+                  left: '0px',
                   zIndex: data.static ? 4 : 1
                 }}
               >

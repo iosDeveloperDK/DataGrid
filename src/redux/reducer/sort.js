@@ -4,14 +4,16 @@ import {
 } from '../../config/constants'
 
 const defaultState = {
-  sort: []
+  sort: JSON.parse(localStorage.getItem('sort') || '[]')
 }
 
 export default (state = defaultState, { type, payload }) => {
   switch (type) {
     case SORT_CHANGE_TYPE:
+      localStorage.setItem('sort', JSON.stringify(payload))
       return { ...state, sort: payload }
     case SORT_MULTIPLE_CHANGE_TYPE:
+      localStorage.setItem('sort', JSON.stringify(payload))
       return { ...state, sort: payload }
     default:
       return state

@@ -18,9 +18,9 @@ export default ({
   selected
 }) => {
   const { columns } = useSelector(state => state.settings)
-  let offsetLeft = useSelector(state => state.table.offsetLeft)
-  // console.log(offset)
-  offsetLeft = offsetLeft > 160 ? offsetLeft - 160 : 0
+  // let offsetLeft = useSelector(state => state.table.offsetLeft)
+  // // console.log(offset)
+  // offsetLeft = offsetLeft > 160 ? offsetLeft - 160 : 0
   const classes = styles()
   const user = data[correctIndex]
 
@@ -39,11 +39,12 @@ export default ({
       >
         {columns
           .filter(column => column.display)
-          .map(column => {
+          .map((column, index) => {
             switch (column.title) {
               case 'CHECKBOX':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} checkbox`}
                     style={{ width: column.width }}
                   >
@@ -53,6 +54,7 @@ export default ({
               case 'AVATAR':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} avatar`}
                     style={{ width: column.width }}
                   >
@@ -62,10 +64,12 @@ export default ({
               case 'NAME':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} name`}
                     style={{
-                      position: 'relative',
-                      left: `${offsetLeft}px`,
+                      position: 'sticky',
+                      left: '0px',
+                      // left: `${offsetLeft}px`,
                       width: column.width
                     }}
                   >
@@ -75,6 +79,7 @@ export default ({
               case 'CAR':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} car`}
                     style={{ width: column.width }}
                   >
@@ -84,6 +89,7 @@ export default ({
               case 'TYPE':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} type`}
                     style={{ width: column.width }}
                   >
@@ -93,6 +99,7 @@ export default ({
               case 'PRICE':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} price ${user.price < 0 &&
                       'minus'}`}
                     style={{ width: column.width }}
@@ -103,6 +110,7 @@ export default ({
               case 'ONLINE':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} online`}
                     style={{ width: column.width }}
                   >
@@ -114,6 +122,7 @@ export default ({
               case 'DATE':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} date`}
                     style={{ width: column.width }}
                   >
@@ -123,6 +132,7 @@ export default ({
               case 'TEXT':
                 return (
                   <div
+                    key={index}
                     className={`${classes.rowValue} text`}
                     style={{ width: column.width }}
                   >

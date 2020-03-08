@@ -1,13 +1,17 @@
 import React from 'react'
-import { Box, Typography, Grid } from '@material-ui/core'
+import { Box, Typography, Grid, Button } from '@material-ui/core'
 import FieldFilter from './field-filter/FieldFilter'
 import EnumFilter from './enum-filter/EnumFilter'
 import GlobalFilter from './global-filter/GlobalFilter'
 import ToggleFilter from './toggle-filter/ToggleFilter'
+import { useDispatch } from 'react-redux'
+import { clearFilters } from '../../redux/action/filter'
 
 export default function Filter() {
+  const dispatch = useDispatch()
+
   return (
-    <Grid container direction="column" style={{ padding: '16px' }} spacing={2}>
+    <Grid container direction="column" style={{ padding: '16px' }} spacing={1}>
       <Grid item sm={12}>
         <Box color="text.main">
           <Typography variant="h5">FILTERS</Typography>
@@ -24,6 +28,15 @@ export default function Filter() {
       </Grid>
       <Grid item sm={12}>
         <ToggleFilter />
+      </Grid>
+      <Grid item sm={12}>
+        <Button
+          color="primary"
+          variant="outlined"
+          onClick={() => dispatch(clearFilters())}
+        >
+          CLEAR FILTERS
+        </Button>
       </Grid>
     </Grid>
   )

@@ -2,7 +2,8 @@ import {
   FILTER_GLOBAL_CHANGE,
   FILTER_ENUM_CHANGE,
   FILTER_FIELD_CHANGE,
-  FILTER_TOGGLE_CHANGE
+  FILTER_TOGGLE_CHANGE,
+  FILTER_CLEAR
 } from '../../config/constants'
 
 export const fieldFilterChange = field => {
@@ -30,5 +31,11 @@ export const toggleFilterChange = filter => {
   return {
     type: FILTER_TOGGLE_CHANGE,
     payload: filter
+  }
+}
+
+export const clearFilters = () => {
+  return {
+    type: FILTER_CLEAR
   }
 }

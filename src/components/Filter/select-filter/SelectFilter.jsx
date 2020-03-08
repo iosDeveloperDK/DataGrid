@@ -11,6 +11,7 @@ export default function SelectFilter({
 }) {
   return (
     <Select
+      value={value}
       options={selectOptions}
       styles={styles()}
       isMulti={isMulti}

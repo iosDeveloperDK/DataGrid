@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     width: '1580px',
+    height: '56px',
     top: 0,
     // width: '1184px',
     color: `${theme.palette.primary.main}`,
