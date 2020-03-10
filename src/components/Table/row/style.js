@@ -54,22 +54,24 @@ const useStyles = makeStyles({
       width: '100px',
       color: theme.palette.secondary.complete
     },
-    '&.online': {
-      paddingLeft: '16px',
-      '& span': {
-        width: '14px',
-        height: '14px',
-        borderRadius: '50%',
-        '&.online': {
-          background: theme.palette.secondary.complete
-        },
-        '&.offline': {
-          background: theme.palette.secondary.clear
-        }
-      }
-    },
     '&.minus': {
       color: theme.palette.secondary.clear
+    }
+  },
+  online: {
+    display: 'flex',
+    width: '100%',
+    paddingLeft: '10px',
+    '& span': {
+      width: '14px',
+      height: '14px',
+      borderRadius: '50%',
+      '&.online': {
+        background: theme.palette.secondary.complete
+      },
+      '&.offline': {
+        background: theme.palette.secondary.clear
+      }
     }
   },
   rowText: {

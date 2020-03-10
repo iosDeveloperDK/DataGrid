@@ -66,7 +66,7 @@ const defaultState = {
       title: 'DATE',
       type: 'text',
       sort: 'date',
-      width: '150px',
+      width: '100px',
       display: true
     },
     {
@@ -74,7 +74,7 @@ const defaultState = {
       title: 'TEXT',
       type: 'text',
       sort: 'text',
-      width: '636px',
+      width: '836px',
       display: true
     }
   ]

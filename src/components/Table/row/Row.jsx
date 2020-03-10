@@ -84,10 +84,12 @@ export default React.memo(
           return (
             <div
               key={index}
-              className={`${classes.rowValue} online`}
+              className={`${classes.rowValue}`}
               style={{ width: column.width }}
             >
-              <span className={user.isOnline ? 'online' : 'offline'}></span>
+              <div className={classes.online}>
+                <span className={user.isOnline ? 'online' : 'offline'}></span>
+              </div>
             </div>
           )
         case 'DATE':
