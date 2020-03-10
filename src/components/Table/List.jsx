@@ -44,7 +44,7 @@ export default function List({ data }) {
               }}
               height={height}
               itemSize={56}
-              overscanCount={39}
+              overscanCount={26}
               innerElementType={InnerElementType}
               itemCount={data.length + 1}
               width={width}
@@ -129,6 +129,7 @@ export default function List({ data }) {
                   {value => {
                     return (
                       <Row
+                        key={value.index}
                         data={data}
                         correctIndex={value.index}
                         style={value.style}

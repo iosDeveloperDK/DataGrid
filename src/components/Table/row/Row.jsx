@@ -8,6 +8,7 @@ export default React.memo(
     const { columns } = useSelector(state => state.settings)
     const classes = styles()
     const user = data[correctIndex]
+    console.log('render')
 
     return (
       user && (

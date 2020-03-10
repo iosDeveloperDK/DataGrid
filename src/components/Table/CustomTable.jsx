@@ -42,6 +42,7 @@ export default function CustomTable({
     return rowIndexes.map(index => {
       return createElement(children, {
         index,
+        key: index,
         style: {
           height: `${rowHeight}px`,
           position: 'absolute',
