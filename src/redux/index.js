@@ -5,11 +5,14 @@ import createRootReducer from './reducer'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
+import query from './middleware/QueryMiddleware'
 
 const history = createBrowserHistory()
 const store = createStore(
   createRootReducer(history),
-  composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
+  composeWithDevTools(
+    applyMiddleware(routerMiddleware(history), query(history), thunk)
+  )
 )
 
 export default store

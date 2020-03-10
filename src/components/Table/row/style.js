@@ -2,26 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import theme from '../../../config/theme'
 
 const useStyles = makeStyles({
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '1580px',
-    top: 0,
-    // width: '1184px',
-    color: `${theme.palette.primary.main}`,
-    borderBottom: `1px solid ${theme.palette.primary.main}40`,
-
-    '& div p': {
-      fontSize: '11px'
-    },
-    userSelect: 'none'
-  },
-  column: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: theme.spacing(0, 1)
-  },
   checkbox: {
     width: '60px'
   },

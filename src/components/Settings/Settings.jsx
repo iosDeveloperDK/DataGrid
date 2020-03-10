@@ -2,8 +2,7 @@ import React from 'react'
 import { Box, Typography, Grid } from '@material-ui/core'
 import ColumnTransfer from './column-transfer/ColumnTransfer'
 import ToggleVirtualization from './toggle-virtualization/ToggleVirtualization'
-import { useDispatch, useSelector } from 'react-redux'
-import _ from 'lodash'
+import { useSelector } from 'react-redux'
 import OtherSettings from './others/OtherSettings'
 
 export default function Settings({ data }) {

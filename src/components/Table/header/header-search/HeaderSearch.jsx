@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import styles from "./style";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
-import HeaderSearchIcon from "./HeaderSearchIcon";
+import React, { useState } from 'react'
+import styles from './style'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import { Paper } from '@material-ui/core'
 
 export default function HeaderSearch({
-  id,
   width,
   open,
   handleSearch,
   handleClear
 }) {
-  const classes = styles();
-  const [search, setSearch] = useState("");
-  console.log(open);
+  const classes = styles()
+  const [search, setSearch] = useState('')
 
   return (
     <>
@@ -27,7 +24,7 @@ export default function HeaderSearch({
         <TextField
           inputProps={{
             style: {
-              padding: "6px"
+              padding: '6px'
             }
           }}
           variant="outlined"
@@ -37,20 +34,13 @@ export default function HeaderSearch({
           type="search"
           value={search}
           onChange={event => {
-            setSearch(event.target.value);
-            //   setSearch({
-            //     ...searchState,
-            //     [id]: {
-            //       ...searchState[id],
-            //       search: event.target.value
-            //     }
-            //   });
+            setSearch(event.target.value)
           }}
         />
         <div
           style={{
-            display: "flex",
-            paddingTop: "10px"
+            display: 'flex',
+            paddingTop: '10px'
           }}
         >
           <Button
@@ -66,8 +56,8 @@ export default function HeaderSearch({
             size="small"
             className={classes.clearButton}
             onClick={() => {
-              setSearch("");
-              handleClear();
+              setSearch('')
+              handleClear()
             }}
           >
             Clear
@@ -75,5 +65,5 @@ export default function HeaderSearch({
         </div>
       </Paper>
     </>
-  );
+  )
 }

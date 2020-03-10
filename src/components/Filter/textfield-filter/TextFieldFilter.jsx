@@ -11,6 +11,7 @@ export default function TextFieldFilter({ onChange, value }) {
       placeholder="Search"
       variant="outlined"
       fullWidth
+      type="search"
       value={value}
       InputProps={{
         classes: {

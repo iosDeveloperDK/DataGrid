@@ -53,7 +53,9 @@ export default function HeaderTitle({
           case 'checkbox':
             return (
               <Checkbox
-                className={classes.icon}
+                className={`${
+                  !selectedRows ? classes.icon : classes.iconSelected
+                }`}
                 onClick={() => {
                   dispatch(selectAllUsers(!selectedRows))
                 }}

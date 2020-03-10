@@ -7,6 +7,8 @@ import { changeRowOffset } from '../../redux/action/table'
 import _ from 'lodash'
 import TableSnackbar from '../snackbar/TableSnackbar'
 import { deleteUsers } from '../../redux/action/users'
+import AutoSizer from 'react-virtualized-auto-sizer'
+import CustomTable from './CustomTable'
 
 const InnerElementType = ({ children, ...rest }) => {
   return (
@@ -34,84 +36,122 @@ export default function List({ data }) {
   return (
     <>
       {virtualization ? (
-        <FixedSizeList
-          onScroll={scroll => {
-            dispatch(changeRowOffset(scroll.scrollOffset))
-          }}
-          height={828}
-          itemSize={56}
-          innerElementType={InnerElementType}
-          itemCount={data.length + 1}
-          width={1282}
-          itemData={{ ...data }}
-        >
-          {data => {
-            if (data.index === 0) {
-              return null
-            } else {
-              const correctIndex = data.index - 1
+        <AutoSizer>
+          {({ height, width }) => (
+            <FixedSizeList
+              onScroll={scroll => {
+                dispatch(changeRowOffset(scroll.scrollOffset))
+              }}
+              height={height}
+              itemSize={56}
+              overscanCount={39}
+              innerElementType={InnerElementType}
+              itemCount={data.length + 1}
+              width={width}
+              itemData={{ ...data }}
+            >
+              {data => {
+                if (data.index === 0) {
+                  return null
+                } else {
+                  const correctIndex = data.index - 1
 
-              return (
-                <Row
-                  {...data}
-                  correctIndex={correctIndex}
-                  selected={selectedRow.includes(correctIndex)}
-                  handleClick={index => {
-                    if (selectedRow.includes(correctIndex)) {
-                      _.pull(selectedRow, index)
-                      setSelectRow([...selectedRow])
-                    } else {
-                      setSelectRow([...selectedRow, index])
-                    }
-                  }}
-                  handleShiftClick={index => {
-                    if (selectedRow.includes(correctIndex)) {
-                      _.pull(selectedRow, index)
-                      setSelectRow([...selectedRow])
-                    } else {
-                      let maxValue = 0
-                      let minValue = index
-
-                      let insertArray = []
-                      selectedRow.sort().forEach(value => {
-                        if (index < value) {
-                          maxValue = value
-                          return
+                  return (
+                    <Row
+                      {...data}
+                      correctIndex={correctIndex}
+                      selected={selectedRow.includes(correctIndex)}
+                      handleClick={index => {
+                        if (selectedRow.includes(correctIndex)) {
+                          _.pull(selectedRow, index)
+                          setSelectRow([...selectedRow])
                         } else {
-                          minValue = value
-                          maxValue = index
+                          setSelectRow([...selectedRow, index])
                         }
-                      })
-                      for (let i = minValue; i <= maxValue; i++) {
-                        insertArray.push(i)
-                      }
+                      }}
+                      handleShiftClick={index => {
+                        if (selectedRow.includes(correctIndex)) {
+                          _.pull(selectedRow, index)
+                          setSelectRow([...selectedRow])
+                        } else {
+                          let maxValue = 0
+                          let minValue = index
 
-                      if (selectedRow.length > 0) {
-                        setSelectRow(_.union(selectedRow, insertArray))
-                      } else {
-                        setSelectRow([...selectedRow, index])
-                      }
-                    }
-                  }}
-                />
-              )
-            }
-          }}
-        </FixedSizeList>
+                          let insertArray = []
+                          selectedRow.sort().forEach(value => {
+                            if (index < value) {
+                              maxValue = value
+                              return
+                            } else {
+                              minValue = value
+                              maxValue = index
+                            }
+                          })
+                          for (let i = minValue; i <= maxValue; i++) {
+                            insertArray.push(i)
+                          }
+
+                          if (selectedRow.length > 0) {
+                            setSelectRow(_.union(selectedRow, insertArray))
+                          } else {
+                            setSelectRow([...selectedRow, index])
+                          }
+                        }
+                      }}
+                    />
+                  )
+                }
+              }}
+            </FixedSizeList>
+          )}
+        </AutoSizer>
       ) : (
-        <div style={{ height: '828px', overflowY: 'scroll' }}>
+        <>
+          {/* <div style={{ height: '828px', overflowY: 'scroll' }}>
           <InnerElementType>
             {data.map((user, index) => (
               <Row key={index} correctIndex={index} style={{}} data={data} />
             ))}
           </InnerElementType>
-        </div>
+        </div> */}
+          <AutoSizer>
+            {({ height, width }) => {
+              console.log(height, width)
+              return (
+                <CustomTable
+                  itemCount={data.length}
+                  rowHeight={56}
+                  overscanCount={1}
+                  height={height}
+                  width={width}
+                  innerElementType={InnerElementType}
+                >
+                  {value => {
+                    return (
+                      <Row
+                        data={data}
+                        correctIndex={value.index}
+                        style={value.style}
+                      />
+                    )
+                  }}
+                </CustomTable>
+              )
+            }}
+          </AutoSizer>
+        </>
       )}
       <TableSnackbar
         display={selectedRow.length > 0}
         handleDelete={() => {
           setSelectRow([])
-          dispatch(deleteUsers(selectedRow))
+          dispatch(
+            deleteUsers(
+              data
+                .filter((user, index) => selectedRow.includes(index))
+                .map(user => user.id)
+            )
+          )
         }}
       />
     </>
