@@ -4,20 +4,20 @@ import theme from '../../../config/theme'
 const useStyles = makeStyles({
   root: {},
   switchBase: {
-    color: theme.palette.secondary.border,
+    color: `${theme.palette.secondary.border} !important`,
     '&$checked': {
-      color: theme.palette.secondary.main,
+      color: `${theme.palette.secondary.main} !important`,
       '& + $track': {
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: `${theme.palette.secondary.main} !important`
       }
     }
   },
   track: {
-    backgroundColor: theme.palette.secondary.border
+    backgroundColor: `${theme.palette.secondary.border} !important`
   },
   checked: {},
   label: {
-    color: theme.palette.primary.main
+    color: `${theme.palette.primary.main} !important`
   }
 })
 

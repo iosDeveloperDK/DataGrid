@@ -21,13 +21,13 @@ export default function ToggleVirtualization() {
 
   return (
     <Grid container>
-      <Grid item sm={12}>
+      <Grid item sm={12} xs={12}>
         <Typography color="primary" variant="overline">
           VIRTUALIZATION
         </Typography>
       </Grid>
       <Grid item container spacing={2}>
-        <Grid item sm={12}>
+        <Grid item sm={12} xs={12}>
           <SelectFilter
             isClearable={false}
             selectOptions={selectOptions}

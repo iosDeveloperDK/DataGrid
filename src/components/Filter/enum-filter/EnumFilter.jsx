@@ -32,7 +32,7 @@ export default function EnumFilter() {
         </Typography>
       </Grid>
       <Grid item container spacing={2}>
-        <Grid item sm={12}>
+        <Grid item sm={12} xs={12}>
           <SelectFilter
             selectOptions={selectOptions}
             value={selectOptions.filter(option =>

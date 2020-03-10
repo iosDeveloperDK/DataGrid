@@ -10,9 +10,10 @@ import { FIELD_FILTER } from '../../../utils/constants'
 export default function FieldFilter() {
   const dispatch = useDispatch()
   const { fieldFilter } = useSelector(state => state.filter)
-
-  const [filter, setFilter] = useState(fieldFilter[Object.keys(fieldFilter)[0]])
-  const [field, setField] = useState(Object.keys(fieldFilter)[0])
+  const key = Object.keys(fieldFilter)[0] || null
+  const values = fieldFilter[key] || ''
+  const [filter, setFilter] = useState(values)
+  const [field, setField] = useState(key)
   const selectOptions = [
     { label: 'Name', value: 'name' },
     { label: 'Car', value: 'car' },
@@ -31,17 +32,17 @@ export default function FieldFilter() {
   useEffect(() => {
     if (field && filter) {
       dispatch(fieldFilterChange({ [field]: filter }))
-    } else {
-      dispatch(fieldFilterChange({}))
+    } else if (field) {
+      dispatch(fieldFilterChange({ [field]: filter }))
     }
   }, [filter, field, dispatch])
 
   useEffect(() => {
-    if (_.isEmpty(fieldFilter) && filter && field) {
-      setFilter('')
-      setField(null)
+    if (fieldFilter) {
+      setFilter(values)
+      setField(key)
     }
-  }, [fieldFilter, filter, field])
+  }, [fieldFilter, values, key])
 
   return (
     <Grid container>
@@ -69,6 +70,7 @@ export default function FieldFilter() {
             onClear={() => {
               setFilter('')
               setField(null)
+              dispatch(fieldFilterChange({}))
             }}
           />
         </Grid>

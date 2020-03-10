@@ -1,4 +1,5 @@
 import Faker from 'faker'
+import { toDateFormat } from '../utils/utils'
 
 Faker.seed(777)
 
@@ -26,8 +27,8 @@ const makeData = id => {
       'Mercedes-Benz',
       'Kia'
     ][Faker.random.number({ min: 0, max: 7 })],
-    date: Faker.date.between('2015-01-01', '2015-01-05')
+    date: toDateFormat(Faker.date.between('2015-01-01', '2015-01-05'))
   }
 }
 
-export default [...new Array(50)].map((_, id) => makeData(id))
+export default [...new Array(2000)].map((_, id) => makeData(id))

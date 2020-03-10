@@ -11,6 +11,7 @@ export default function CustomTable({
   children,
   innerElementType
 }) {
+  const topOffsetRow = 5
   const containerRef = useRef()
   const visibleRowsCount = Math.floor(height / rowHeight)
   const [rowIndexes, setRowIndexes] = useState(
@@ -21,9 +22,11 @@ export default function CustomTable({
     if (containerRef.current) {
       const { scrollTop } = containerRef.current
       const index = Math.floor((scrollTop + height) / rowHeight)
-      const indexes = _.range(Math.min(index + overscanCount, itemCount))
+      const indexes = _.range(
+        Math.min(index + overscanCount - topOffsetRow, itemCount)
+      )
 
-      if (indexes.length >= visibleRowsCount + overscanCount) {
+      if (indexes.length >= visibleRowsCount + overscanCount + topOffsetRow) {
         const length = indexes.length
         setRowIndexes(
           _.slice(indexes, length - visibleRowsCount - overscanCount, length)

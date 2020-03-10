@@ -20,36 +20,43 @@ export default function OtherSettings({ columns, offset = 0, data }) {
     }))
   }
 
+  const renderCSVLink = () => {
+    if (csvData().length) {
+      return (
+        <Grid item sm={6} xs={6}>
+          <CSVLink
+            className={classes.link}
+            filename={'data-grid.csv'}
+            data={csvData()}
+            headers={columns
+              .filter(column => column.id !== 'checkbox')
+              .map(column => ({
+                label: column.title,
+                key: column.id
+              }))}
+          >
+            CSV EXAMPLE
+          </CSVLink>
+        </Grid>
+      )
+    }
+    return null
+  }
+
   return (
     <Grid container spacing={1}>
-      <Grid item sm={12}>
+      <Grid item sm={12} xs={12}>
         <Typography color="primary" variant="overline">
           OTHERS
         </Typography>
       </Grid>
       <Grid item container spacing={1}>
-        <Grid item sm={6}>
-          {csvData().length && (
-            <CSVLink
-              className={classes.link}
-              filename={'data-grid.csv'}
-              data={csvData()}
-              headers={columns
-                .filter(column => column.id !== 'checkbox')
-                .map(column => ({
-                  label: column.title,
-                  key: column.id
-                }))}
-            >
-              CSV EXAMPLE
-            </CSVLink>
-          )}
-        </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={6} xs={6}>
           <Link className={classes.link} to="/?enum=Worker&text=Miss">
             QUERYSTRING EXAMPLE
           </Link>
         </Grid>
+        {renderCSVLink()}
       </Grid>
     </Grid>
   )

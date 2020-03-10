@@ -7,7 +7,7 @@ export default function TableSnackbar({ display, handleDelete }) {
 
   useEffect(() => {
     setOpen(display)
-  }, [display])
+  }, [display, open])
 
   return (
     <div>

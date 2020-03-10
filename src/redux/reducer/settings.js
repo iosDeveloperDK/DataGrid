@@ -5,7 +5,7 @@ import {
 
 const defaultState = {
   virtualization: true,
-  columns: JSON.parse(localStorage.getItem('columns')) || [
+  columns: [
     {
       id: 'checkbox',
       title: 'CHECKBOX',
@@ -85,7 +85,6 @@ export default (state = defaultState, { type, payload }) => {
     case SETTINGS_VIRTUALIZATION:
       return { ...state, virtualization: payload }
     case SETTINGS_TABLE_COLUMNS:
-      localStorage.setItem('columns', JSON.stringify(payload))
       return { ...state, columns: payload }
     default:
       return state

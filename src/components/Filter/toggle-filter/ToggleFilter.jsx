@@ -35,7 +35,7 @@ export default function ToggleFilter() {
         </Typography>
       </Grid>
       <Grid container item sm={12} spacing={2}>
-        <Grid item sm={6}>
+        <Grid item sm={3}>
           <SwitchFilter
             label="Online"
             checked={online}
@@ -45,7 +45,7 @@ export default function ToggleFilter() {
             }}
           />
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={4}>
           <SwitchFilter
             label="Offline"
             checked={offline}

@@ -21,7 +21,7 @@ const styles = {
   paper: {
     boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.2)`,
     overflow: 'hidden',
-    height: '100%'
+    height: '828px'
   }
 }
 
@@ -36,12 +36,12 @@ class Root extends Component {
     return (
       <div className={classes.container}>
         <Box p={2} width="100%">
-          <Typography color="primary" variant="overline">
-            {TASK_NAME}
-          </Typography>
           <Box height={`${containerHeight}px`}>
             <Grid container>
-              <Grid item sm={4}>
+              <Grid item sm={4} xs={12}>
+                <Typography color="primary" variant="overline">
+                  {TASK_NAME}
+                </Typography>
                 <Paper
                   className={classes.paper}
                   style={{
@@ -52,7 +52,16 @@ class Root extends Component {
                   <Settings data={users} />
                 </Paper>
               </Grid>
-              <Grid item sm={8}>
+              <Grid item sm={8} xs={12}>
+                <Typography
+                  color="primary"
+                  variant="overline"
+                  style={{
+                    marginLeft: '8px'
+                  }}
+                >
+                  {`Found: ${users.length} users`}
+                </Typography>
                 <Paper
                   className={classes.paper}
                   style={{

@@ -9,7 +9,7 @@ import _ from 'lodash'
 const defaultState = {
   users: [],
   isLoading: false,
-  selectedRows: false
+  selectedRows: 0
 }
 
 export default (state = defaultState, { type, payload }) => {

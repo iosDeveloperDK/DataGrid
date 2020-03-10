@@ -7,7 +7,7 @@ import ToggleFilter from './toggle-filter/ToggleFilter'
 import { useDispatch } from 'react-redux'
 import { clearFilters } from '../../redux/action/filter'
 
-export default function Filter() {
+export default React.memo(function Filter() {
   const dispatch = useDispatch()
 
   return (
@@ -40,4 +40,4 @@ export default function Filter() {
       </Grid>
     </Grid>
   )
-}
+})

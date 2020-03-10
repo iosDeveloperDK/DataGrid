@@ -56,12 +56,16 @@ export default function HeaderTitle({
             return (
               <Checkbox
                 className={`${
-                  !selectedRows ? classes.icon : classes.iconSelected
+                  selectedRows === 1 ? classes.iconSelected : classes.icon
                 }`}
                 onClick={() => {
-                  dispatch(selectAllUsers(!selectedRows))
+                  if (selectedRows === 1) {
+                    dispatch(selectAllUsers(2))
+                  } else {
+                    dispatch(selectAllUsers(1))
+                  }
                 }}
-                checked={selectedRows}
+                checked={selectedRows === 1}
               />
             )
           default:
