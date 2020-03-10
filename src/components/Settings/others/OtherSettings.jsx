@@ -7,6 +7,10 @@ import styles from './style'
 
 export default function OtherSettings({ columns, offset = 0, data }) {
   const classes = styles()
+  const columnID = columns.map(
+    column => column.id !== 'checkbox' && column.display
+  )
+  console.log(columnID)
 
   const csvData = () => {
     return _.slice(
@@ -15,9 +19,17 @@ export default function OtherSettings({ columns, offset = 0, data }) {
       13 + Math.floor(offset / 56)
     ).map(user => ({
       ...user,
-      checkbox: user.cheked ? 'Yes' : 'No',
       isOnline: user.isOnline ? 'Yes' : 'No'
     }))
+  }
+
+  const csvColumns = () => {
+    return columns
+      .filter(column => column.id !== 'checkbox' && column.display)
+      .map(column => ({
+        label: column.title,
+        key: column.id
+      }))
   }
 
   const renderCSVLink = () => {
@@ -25,15 +37,11 @@ export default function OtherSettings({ columns, offset = 0, data }) {
       return (
         <Grid item sm={6} xs={6}>
           <CSVLink
+            key={csvColumns().length}
             className={classes.link}
             filename={'data-grid.csv'}
             data={csvData()}
-            headers={columns
-              .filter(column => column.id !== 'checkbox')
-              .map(column => ({
-                label: column.title,
-                key: column.id
-              }))}
+            headers={csvColumns()}
           >
             CSV EXAMPLE
           </CSVLink>

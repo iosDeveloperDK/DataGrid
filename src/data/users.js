@@ -27,7 +27,7 @@ const makeData = id => {
       'Mercedes-Benz',
       'Kia'
     ][Faker.random.number({ min: 0, max: 7 })],
-    date: toDateFormat(Faker.date.between('2015-01-01', '2015-01-05'))
+    date: toDateFormat(Faker.date.between('2018-01-01', '2020-03-10'))
   }
 }
 
