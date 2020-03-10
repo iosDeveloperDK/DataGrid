@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Typography, Grid, Button } from '@material-ui/core'
 import FieldFilter from './field-filter/FieldFilter'
 import EnumFilter from './enum-filter/EnumFilter'
-import GlobalFilter from './global-filter/GlobalFilter'
+import SearchFilter from './search-filter/SearchFilter'
 import ToggleFilter from './toggle-filter/ToggleFilter'
 import { useDispatch } from 'react-redux'
 import { clearFilters } from '../../redux/action/filter'
@@ -21,7 +21,7 @@ export default function Filter() {
         <FieldFilter />
       </Grid>
       <Grid item sm={12}>
-        <GlobalFilter />
+        <SearchFilter />
       </Grid>
       <Grid item sm={12}>
         <EnumFilter />

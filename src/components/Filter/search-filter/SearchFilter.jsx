@@ -2,26 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import TextFieldFilter from '../textfield-filter/TextFieldFilter'
 import { useDispatch, useSelector } from 'react-redux'
-import { globalFilterChange } from '../../../redux/action/filter'
+import { searchFilterChange } from '../../../redux/action/filter'
+import { SEARCH_FILTER } from '../../../utils/constants'
 
-export default function GlobalFilter() {
+export default function SearchFilter() {
   const dispatch = useDispatch()
-  const { filter } = useSelector(state => state.filter)
-  const [value, setValue] = useState(filter)
+  const { searchFilter } = useSelector(state => state.filter)
+  const [value, setValue] = useState(searchFilter)
 
   useEffect(() => {
-    dispatch(globalFilterChange(value))
+    dispatch(searchFilterChange(value))
   }, [value, dispatch])
 
   useEffect(() => {
-    setValue(filter)
-  }, [filter])
+    setValue(searchFilter)
+  }, [searchFilter])
 
   return (
     <Grid container>
       <Grid item sm={12}>
         <Typography color="primary" variant="overline">
-          GLOBAL FILTER
+          {SEARCH_FILTER}
         </Typography>
       </Grid>
       <Grid item container spacing={2}>

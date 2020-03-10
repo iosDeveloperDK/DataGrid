@@ -14,7 +14,6 @@ function App() {
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
           <Root />
-          {/* <TodoList /> */}
         </ThemeProvider>
       </ConnectedRouter>
     </Provider>

@@ -3,13 +3,12 @@ import { Typography, Grid } from '@material-ui/core'
 import SelectFilter from '../select-filter/SelectFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import { enumFilterChange } from '../../../redux/action/filter'
-import _ from 'lodash'
+import { ENUM_FILTER } from '../../../utils/constants'
 
 export default function EnumFilter() {
   const dispatch = useDispatch()
-  const { enum: object } = useSelector(state => state.filter)
-
-  const [filter, setFilter] = useState(object)
+  const { enumFilter } = useSelector(state => state.filter)
+  const [filter, setFilter] = useState(enumFilter)
   const selectOptions = [
     { label: 'Admin', value: 'Admin' },
     { label: 'Student', value: 'Student' },
@@ -29,7 +28,7 @@ export default function EnumFilter() {
     <Grid container>
       <Grid item sm={12}>
         <Typography color="primary" variant="overline">
-          ENUM FILTER
+          {ENUM_FILTER}
         </Typography>
       </Grid>
       <Grid item container spacing={2}>
@@ -37,7 +36,7 @@ export default function EnumFilter() {
           <SelectFilter
             selectOptions={selectOptions}
             value={selectOptions.filter(option =>
-              object.includes(option.value)
+              enumFilter.includes(option.value)
             )}
             isMulti
             onChange={filter => {

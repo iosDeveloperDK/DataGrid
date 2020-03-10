@@ -30,7 +30,8 @@ export default () => ({
       background: isSelected ? theme.palette.text.main : '#fff',
       fontWeight: '300',
       fontSize: '14px',
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+      zIndex: 10000
     }
   },
   multiValue: styles => {

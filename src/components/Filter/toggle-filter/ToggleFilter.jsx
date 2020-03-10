@@ -3,12 +3,13 @@ import { Typography, Grid } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleFilterChange } from '../../../redux/action/filter'
 import SwitchFilter from '../switch-filter/SwitchFilter'
+import { TOGGLE_FILTER } from '../../../utils/constants'
 
 export default function ToggleFilter() {
   const dispatch = useDispatch()
-  const { toggle } = useSelector(state => state.filter)
-  const onlineToggle = toggle === null ? false : toggle
-  const offlineToggle = toggle === null ? false : !toggle
+  const { toggleFilter } = useSelector(state => state.filter)
+  const onlineToggle = toggleFilter === null ? false : toggleFilter
+  const offlineToggle = toggleFilter === null ? false : !toggleFilter
 
   const [online, setOnline] = useState(onlineToggle)
   const [offline, setOffline] = useState(offlineToggle)
@@ -24,13 +25,13 @@ export default function ToggleFilter() {
   useEffect(() => {
     setOnline(onlineToggle)
     setOffline(offlineToggle)
-  }, [toggle, onlineToggle, offlineToggle])
+  }, [toggleFilter, onlineToggle, offlineToggle])
 
   return (
     <Grid container>
       <Grid item sm={12}>
         <Typography color="primary" variant="overline">
-          TOGGLE FILTER
+          {TOGGLE_FILTER}
         </Typography>
       </Grid>
       <Grid container item sm={12} spacing={2}>

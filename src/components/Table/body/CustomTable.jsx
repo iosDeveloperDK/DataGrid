@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState, createElement } from 'react'
+import { useRef, useEffect, useState, useCallback, createElement } from 'react'
 import _ from 'lodash'
 
 export default function CustomTable({
   itemCount,
   rowHeight,
   overscanCount,
+  offsetTop,
   height,
   width,
   children,
@@ -16,11 +17,12 @@ export default function CustomTable({
     [...new Array(visibleRowsCount)].map((_, index) => index)
   )
 
-  const scroll = () => {
+  const scroll = useCallback(() => {
     if (containerRef.current) {
       const { scrollTop } = containerRef.current
       const index = Math.floor((scrollTop + height) / rowHeight)
       const indexes = _.range(Math.min(index + overscanCount, itemCount))
+
       if (indexes.length >= visibleRowsCount + overscanCount) {
         const length = indexes.length
         setRowIndexes(
@@ -30,13 +32,13 @@ export default function CustomTable({
         setRowIndexes(indexes)
       }
     }
-  }
+  }, [height, itemCount, overscanCount, rowHeight, visibleRowsCount])
 
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.addEventListener('scroll', scroll)
     }
-  }, [])
+  }, [scroll])
 
   const returnItems = () => {
     return rowIndexes.map(index => {
@@ -46,7 +48,7 @@ export default function CustomTable({
         style: {
           height: `${rowHeight}px`,
           position: 'absolute',
-          top: `${index * rowHeight}px`
+          top: `${index * rowHeight + offsetTop}px`
         }
       })
     })

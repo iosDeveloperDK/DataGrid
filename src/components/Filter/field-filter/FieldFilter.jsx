@@ -5,13 +5,14 @@ import TextFieldFilter from '../textfield-filter/TextFieldFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import { fieldFilterChange } from '../../../redux/action/filter'
 import _ from 'lodash'
+import { FIELD_FILTER } from '../../../utils/constants'
 
 export default function FieldFilter() {
   const dispatch = useDispatch()
-  const { field: object } = useSelector(state => state.filter)
+  const { fieldFilter } = useSelector(state => state.filter)
 
-  const [filter, setFilter] = useState(object[Object.keys(object)[0]])
-  const [field, setField] = useState(Object.keys(object)[0])
+  const [filter, setFilter] = useState(fieldFilter[Object.keys(fieldFilter)[0]])
+  const [field, setField] = useState(Object.keys(fieldFilter)[0])
   const selectOptions = [
     { label: 'Name', value: 'name' },
     { label: 'Car', value: 'car' },
@@ -36,17 +37,17 @@ export default function FieldFilter() {
   }, [filter, field, dispatch])
 
   useEffect(() => {
-    if (_.isEmpty(object) && filter && field) {
+    if (_.isEmpty(fieldFilter) && filter && field) {
       setFilter('')
       setField(null)
     }
-  }, [object])
+  }, [fieldFilter, filter, field])
 
   return (
     <Grid container>
       <Grid item sm={12}>
         <Typography color="primary" variant="overline">
-          FIELD FILTER
+          {FIELD_FILTER}
         </Typography>
       </Grid>
       <Grid item container spacing={2} alignItems="flex-start">

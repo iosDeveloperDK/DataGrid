@@ -1,12 +1,15 @@
 import React from 'react'
-import styles from './style'
+import styles from '../style'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeSortType, changeMultipleSortType } from '../../redux/action/sort'
+import {
+  changeSortType,
+  changeMultipleSortType
+} from '../../../redux/action/sort'
 import _ from 'lodash'
-import HeaderTitle from './header/header-title/HeaderTitle'
-import HeaderSearchIcon from './header/header-search/HeaderSearchIcon'
+import HeaderTitle from './header-title/HeaderTitle'
+import HeaderSearchIcon from './header-search/HeaderSearchIcon'
 
-export default function Header({ index, style }) {
+export default function Header({ style }) {
   const classes = styles()
   const dispatch = useDispatch()
   const { sort } = useSelector(state => state.sort)

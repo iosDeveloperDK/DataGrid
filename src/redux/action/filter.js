@@ -1,5 +1,5 @@
 import {
-  FILTER_GLOBAL_CHANGE,
+  FILTER_SEARCH_CHANGE,
   FILTER_ENUM_CHANGE,
   FILTER_FIELD_CHANGE,
   FILTER_TOGGLE_CHANGE,
@@ -13,9 +13,9 @@ export const fieldFilterChange = field => {
   }
 }
 
-export const globalFilterChange = (filter, save = true) => {
+export const searchFilterChange = (filter, save = true) => {
   return {
-    type: FILTER_GLOBAL_CHANGE,
+    type: FILTER_SEARCH_CHANGE,
     payload: filter,
     save
   }

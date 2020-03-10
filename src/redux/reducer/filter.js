@@ -1,5 +1,5 @@
 import {
-  FILTER_GLOBAL_CHANGE,
+  FILTER_SEARCH_CHANGE,
   FILTER_ENUM_CHANGE,
   FILTER_FIELD_CHANGE,
   FILTER_TOGGLE_CHANGE,
@@ -7,36 +7,42 @@ import {
 } from '../../config/constants'
 
 const defaultState = {
-  filter: JSON.parse(localStorage.getItem('filter')) || '',
-  enum: JSON.parse(localStorage.getItem('enum')) || [],
-  field: JSON.parse(localStorage.getItem('field')) || {},
-  toggle: JSON.parse(localStorage.getItem('toggle'))
+  searchFilter: JSON.parse(localStorage.getItem('searchFilter')) || '',
+  enumFilter: JSON.parse(localStorage.getItem('enumFilter')) || [],
+  fieldFilter: JSON.parse(localStorage.getItem('fieldFilter')) || {},
+  toggleFilter: JSON.parse(localStorage.getItem('toggleFilter'))
 }
 
 export default (state = defaultState, { type, payload, save }) => {
   switch (type) {
     case FILTER_FIELD_CHANGE:
-      localStorage.setItem('field', JSON.stringify(payload))
-      return { ...state, field: payload }
-    case FILTER_GLOBAL_CHANGE:
+      localStorage.setItem('fieldFilter', JSON.stringify(payload))
+      return { ...state, fieldFilter: payload }
+    case FILTER_SEARCH_CHANGE:
       if (save) {
-        localStorage.setItem('filter', JSON.stringify(payload))
+        localStorage.setItem('searchFilter', JSON.stringify(payload))
       }
-      return { ...state, filter: payload }
+      return { ...state, searchFilter: payload }
     case FILTER_ENUM_CHANGE:
       if (save) {
-        localStorage.setItem('enum', JSON.stringify(payload))
+        localStorage.setItem('enumFilter', JSON.stringify(payload))
       }
-      return { ...state, enum: payload }
+      return { ...state, enumFilter: payload }
     case FILTER_TOGGLE_CHANGE:
-      localStorage.setItem('toggle', JSON.stringify(payload))
-      return { ...state, toggle: payload }
+      localStorage.setItem('toggleFilter', JSON.stringify(payload))
+      return { ...state, toggleFilter: payload }
     case FILTER_CLEAR:
-      localStorage.removeItem('toggle')
-      localStorage.removeItem('enum')
-      localStorage.removeItem('field')
-      localStorage.removeItem('filter')
-      return { ...state, toggle: null, field: {}, filter: '', enum: [] }
+      localStorage.removeItem('toggleFilter')
+      localStorage.removeItem('enumFilter')
+      localStorage.removeItem('fieldFilter')
+      localStorage.removeItem('searchFilter')
+      return {
+        ...state,
+        toggleFilter: null,
+        fieldFilter: {},
+        searchFilter: '',
+        enumFilter: []
+      }
     default:
       return state
   }

@@ -8,10 +8,8 @@ const useStyles = makeStyles({
     width: '1580px',
     height: '56px',
     top: 0,
-    // width: '1184px',
     color: `${theme.palette.primary.main}`,
     borderBottom: `1px solid ${theme.palette.primary.main}40`,
-
     '& div p': {
       fontSize: '11px'
     },
@@ -75,9 +73,6 @@ const useStyles = makeStyles({
       fontSize: '14px',
       fontWeight: 300
     },
-    '&.checkbox': {
-      // width: '60px'
-    },
     '&.avatar': {
       width: '70px'
     },
@@ -93,7 +88,7 @@ const useStyles = makeStyles({
     },
     '&.price': {
       width: '100px',
-      color: '#46d3ce'
+      color: theme.palette.secondary.complete
     },
     '&.online': {
       width: '56px',
@@ -103,10 +98,10 @@ const useStyles = makeStyles({
         height: '14px',
         borderRadius: '50%',
         '&.online': {
-          background: '#46d3ce'
+          background: theme.palette.secondary.complete
         },
         '&.offline': {
-          background: '#ff619d'
+          background: theme.palette.secondary.clear
         }
       }
     },
@@ -114,12 +109,11 @@ const useStyles = makeStyles({
       width: '150px'
     },
     '&.minus': {
-      color: '#ff619d'
+      color: theme.palette.secondary.clear
     },
     '&.text': {
       width: '536px'
     }
-    // color: '#81a4fb'
   },
   rowText: {
     flexShrink: 10,

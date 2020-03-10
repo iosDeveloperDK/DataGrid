@@ -9,19 +9,19 @@ import { useDispatch } from 'react-redux'
 import { selectAllUsers } from '../../../../redux/action/users'
 
 export default function HeaderTitle({
-  sort,
+  sort: selectSort,
   type,
   title,
   handleShiftClick,
   handleClick
 }) {
   const classes = styles()
-  const { sort: sortes } = useSelector(state => state.sort)
+  const { sort } = useSelector(state => state.sort)
   const { selectedRows } = useSelector(state => state.data)
   const dispatch = useDispatch()
 
   const renderSorting = type => {
-    const sorting = _.find(sortes, { type })
+    const sorting = _.find(sort, { type })
 
     if (!sorting) {
       return null
@@ -34,17 +34,19 @@ export default function HeaderTitle({
     )
   }
 
-  const isSorting = type => _.find(sortes, { type })
+  const isSorting = type => _.find(sort, { type })
 
   return (
     <div
-      className={sort && classes.hover}
+      className={selectSort && classes.hover}
       style={{ display: 'flex' }}
       onClick={event => {
-        if (event.shiftKey) {
-          handleShiftClick()
-        } else {
-          handleClick()
+        if (selectSort) {
+          if (event.shiftKey) {
+            handleShiftClick()
+          } else {
+            handleClick()
+          }
         }
       }}
     >
@@ -66,8 +68,8 @@ export default function HeaderTitle({
             return <Typography>{title}</Typography>
         }
       })()}
-      {sort && renderSorting(sort)}
-      {sort && !isSorting(sort) && (
+      {selectSort && renderSorting(selectSort)}
+      {selectSort && !isSorting(selectSort) && (
         <ArrowUpwardIcon
           className={`${classes.sortHiddenIcon} ${classes.sortIcon}`}
         />

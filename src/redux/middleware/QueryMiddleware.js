@@ -1,8 +1,4 @@
-import { enumFilterChange, globalFilterChange } from '../action/filter'
-import {
-  FILTER_ENUM_CHANGE,
-  FILTER_GLOBAL_CHANGE
-} from '../../config/constants'
+import { enumFilterChange, searchFilterChange } from '../action/filter'
 
 export default history => store => next => action => {
   if (action.type === '@@router/LOCATION_CHANGE') {
@@ -14,7 +10,7 @@ export default history => store => next => action => {
     } = store.getState()
 
     if (query.text) {
-      next(globalFilterChange(query.text, false))
+      next(searchFilterChange(query.text, false))
     }
     if (query.enum) {
       next(enumFilterChange(query.enum, false))

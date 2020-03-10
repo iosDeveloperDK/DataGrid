@@ -8,28 +8,14 @@ const useStyles = makeStyles({
   icon: {
     color: theme.palette.primary.main,
     '& svg': {
-      color: 'inherit'
+      color: theme.palette.primary.main
     }
   },
-  title: {
-    '&:hover': {
-      cursor: 'pointer',
-      color: `${theme.palette.primary.main}90`
-    },
-    '&:hover svg': {
-      opacity: 0.5
-    }
-  },
-  sortIcon: {
-    marginLeft: theme.spacing(0.5),
-    marginTop: '-2px',
-    height: '16px !important',
-    width: 'auto !important',
+  iconSelected: {
     color: theme.palette.secondary.main,
-    opacity: 1
-  },
-  sortHiddenIcon: {
-    opacity: 0
+    '& svg': {
+      color: theme.palette.secondary.main
+    }
   },
   row: {
     userSelect: 'none',
@@ -37,10 +23,10 @@ const useStyles = makeStyles({
     alignItems: 'center'
   },
   rowSelected: {
-    background: '#f5f8fb',
+    background: theme.palette.secondary.select,
     boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.2)`,
     '& div': {
-      background: '#f5f8fb !important'
+      background: `${theme.palette.secondary.select} !important`
     }
   },
   rowAvatar: {
@@ -66,7 +52,7 @@ const useStyles = makeStyles({
     },
     '&.price': {
       width: '100px',
-      color: '#46d3ce'
+      color: theme.palette.secondary.complete
     },
     '&.online': {
       paddingLeft: '16px',
@@ -75,17 +61,16 @@ const useStyles = makeStyles({
         height: '14px',
         borderRadius: '50%',
         '&.online': {
-          background: '#46d3ce'
+          background: theme.palette.secondary.complete
         },
         '&.offline': {
-          background: '#ff619d'
+          background: theme.palette.secondary.clear
         }
       }
     },
     '&.minus': {
-      color: '#ff619d'
+      color: theme.palette.secondary.clear
     }
-    // color: '#81a4fb'
   },
   rowText: {
     flexShrink: 10,

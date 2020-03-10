@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   checkbox: {
     color: theme.palette.primary.main,
+    zIndex: 0,
     '& svg': {
       color: 'inherit'
     }
@@ -49,7 +50,7 @@ export default function ColumnTransfer() {
       </Grid>
       <Grid item container>
         {columns.map(({ title, display }) => (
-          <Grid item sm={2} key={title}>
+          <Grid item key={title}>
             <FormGroup>
               <FormControlLabel
                 control={

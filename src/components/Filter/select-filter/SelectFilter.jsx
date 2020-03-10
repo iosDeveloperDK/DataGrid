@@ -7,7 +7,8 @@ export default function SelectFilter({
   onClear,
   value,
   isMulti,
-  selectOptions
+  selectOptions,
+  isClearable = true
 }) {
   return (
     <Select
@@ -16,9 +17,8 @@ export default function SelectFilter({
       styles={styles()}
       isMulti={isMulti}
       placeholder="Field"
-      isClearable
+      isClearable={isClearable}
       onChange={(value, { action }) => {
-        console.log(action)
         if (value && action === 'select-option') {
           onChange(value)
         } else if (action === 'clear') {
