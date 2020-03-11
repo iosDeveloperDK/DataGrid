@@ -50,7 +50,7 @@ export default function ColumnTransfer() {
       </Grid>
       <Grid item container>
         {columns.map(({ title, display }) => (
-          <Grid item key={title}>
+          <Grid item sm={3} key={title}>
             <FormGroup>
               <FormControlLabel
                 control={
