@@ -2,21 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import { settingsVirtualizationChange } from '../../../redux/action/settings'
-import SelectFilter from '../../Filter/select-filter/SelectFilter'
+import RadioSelect from '../radio-select/RadioSelect'
 
 export default function ToggleVirtualization() {
   const dispatch = useDispatch()
-  const [virtualization, setVirtualization] = useState({
-    label: 'react-window',
-    value: 0
-  })
-  const selectOptions = [
-    { label: 'react-window', value: 0 },
-    { label: 'custom-virtualization', value: 1 },
-    { label: 'simple-table', value: 2 }
-  ]
+  const options = ['react-window', 'custom-virtualization', 'simple-table']
+  const [virtualization, setVirtualization] = useState(0)
+
   useEffect(() => {
-    dispatch(settingsVirtualizationChange(virtualization.value))
+    dispatch(settingsVirtualizationChange(virtualization))
   }, [virtualization, dispatch])
 
   return (
@@ -28,12 +22,11 @@ export default function ToggleVirtualization() {
       </Grid>
       <Grid item container spacing={2}>
         <Grid item sm={12} xs={12}>
-          <SelectFilter
-            isClearable={false}
-            selectOptions={selectOptions}
+          <RadioSelect
             value={virtualization}
+            options={options}
             onChange={value => {
-              setVirtualization(value)
+              setVirtualization(parseInt(value))
             }}
           />
         </Grid>

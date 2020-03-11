@@ -24,7 +24,6 @@ export default function SelectFilter({
         } else if (action === 'clear') {
           onClear()
         } else if (action === 'remove-value') {
-          console.log(value)
           onChange(value)
         }
       }}

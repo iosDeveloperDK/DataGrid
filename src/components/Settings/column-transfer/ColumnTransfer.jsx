@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {},
   label: {
-    color: theme.palette.text.main,
-    fontSize: '12px !important',
+    color: theme.palette.primary.main,
+    fontSize: '13px !important',
     fontWeight: 300
   },
   checkbox: {

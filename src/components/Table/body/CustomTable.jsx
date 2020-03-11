@@ -15,7 +15,9 @@ export default function CustomTable({
   const containerRef = useRef()
   const visibleRowsCount = Math.floor(height / rowHeight)
   const [rowIndexes, setRowIndexes] = useState(
-    [...new Array(visibleRowsCount)].map((_, index) => index)
+    [...new Array(Math.min(visibleRowsCount, itemCount))].map(
+      (_, index) => index
+    )
   )
 
   const scroll = useCallback(() => {

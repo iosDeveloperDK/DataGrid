@@ -4,7 +4,7 @@ import {
 } from '../../config/constants'
 
 const defaultState = {
-  virtualization: true,
+  virtualization: 0,
   columns: [
     {
       id: 'checkbox',

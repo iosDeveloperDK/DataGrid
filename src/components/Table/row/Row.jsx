@@ -4,11 +4,18 @@ import { Typography, Avatar, Checkbox } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 export default React.memo(
-  ({ correctIndex, style, data, handleClick, handleShiftClick, selected }) => {
+  ({
+    correctIndex,
+    style,
+    data,
+    handleClick,
+    handleShiftClick,
+    selectedRow = []
+  }) => {
     const { columns } = useSelector(state => state.settings)
     const classes = styles()
     const user = data[correctIndex]
-    // console.log('render')
+    const selected = user && selectedRow.includes(user.id)
 
     const renderRow = (column, index) => {
       switch (column.title) {

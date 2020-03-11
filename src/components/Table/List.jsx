@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import _ from 'lodash'
 import { FixedSizeList } from 'react-window'
 import Row from './row/Row'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeRowOffset } from '../../redux/action/table'
-import _ from 'lodash'
 import TableSnackbar from '../snackbar/TableSnackbar'
 import { deleteUsers, selectAllUsers } from '../../redux/action/users'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -14,47 +14,68 @@ export default React.memo(function List({ data }) {
   const dispatch = useDispatch()
   const { virtualization } = useSelector(state => state.settings)
   const [selectedRow, setSelectRow] = useState([])
+  const [selectedRowIndex, setSelectRowIndex] = useState([])
   const { selectedRows } = useSelector(state => state.data)
 
   useEffect(() => {
     if (selectedRows === 1) {
-      setSelectRow(_.range(data.length))
+      setSelectRow(data.map(user => user.id))
+      setSelectRowIndex(_.range(data.length))
     } else if (selectedRows === 2) {
       setSelectRow([])
+      setSelectRowIndex([])
       dispatch(selectAllUsers(0))
     }
   }, [selectedRows, data, dispatch])
 
   const deleteSlectedUsers = () => {
     setSelectRow([])
-    dispatch(
-      deleteUsers(
-        data
-          .filter((user, index) => selectedRow.includes(index))
-          .map(user => user.id)
-      )
-    )
+    setSelectRowIndex([])
+    dispatch(deleteUsers(selectedRow))
   }
 
   const hadndleSelecteRow = (correctIndex, index) => {
-    if (selectedRow.includes(correctIndex)) {
-      _.pull(selectedRow, index)
+    const userId = data[correctIndex].id
+    if (selectedRow.includes(userId)) {
+      _.pull(selectedRow, userId)
       setSelectRow([...selectedRow])
+      setSelectRowIndex([...selectedRowIndex])
     } else {
-      setSelectRow([...selectedRow, index])
+      setSelectRow([...selectedRow, userId])
+      setSelectRowIndex([...selectedRowIndex, index])
     }
   }
 
   const handleMultiSelecteRow = (correctIndex, index) => {
-    if (selectedRow.includes(correctIndex)) {
-      _.pull(selectedRow, index)
+    const userId = data[correctIndex].id
+
+    if (selectedRow.includes(userId)) {
+      _.pull(selectedRow, userId)
       setSelectRow([...selectedRow])
+      setSelectRowIndex([...selectedRowIndex])
     } else {
+      let maxIndexValue = 0
+      let minIndexValue = index
+
+      let insertIndexArray = []
+      selectedRowIndex.sort().forEach(value => {
+        if (index < value) {
+          maxIndexValue = value
+          return
+        } else {
+          minIndexValue = value
+          maxIndexValue = index
+        }
+      })
+      for (let i = minIndexValue; i <= maxIndexValue; i++) {
+        insertIndexArray.push(i)
+      }
+
       let maxValue = 0
       let minValue = index
 
       let insertArray = []
-      selectedRow.sort().forEach(value => {
+      selectedRowIndex.sort().forEach(value => {
         if (index < value) {
           maxValue = value
           return
@@ -63,16 +84,38 @@ export default React.memo(function List({ data }) {
           maxValue = index
         }
       })
+
       for (let i = minValue; i <= maxValue; i++) {
-        insertArray.push(i)
+        const userId = data[i].id
+        insertArray.push(userId)
       }
 
       if (selectedRow.length > 0) {
         setSelectRow(_.union(selectedRow, insertArray))
+        setSelectRowIndex(_.union(selectedRowIndex, insertIndexArray))
       } else {
-        setSelectRow([...selectedRow, index])
+        setSelectRow([...selectedRow, userId])
+        setSelectRowIndex([...selectedRowIndex, index])
       }
     }
+  }
+
+  const renderRow = (key, style, data, correctIndex) => {
+    return (
+      <Row
+        key={key}
+        data={data}
+        style={style}
+        correctIndex={correctIndex}
+        selectedRow={selectedRow}
+        handleClick={index => {
+          hadndleSelecteRow(correctIndex, index)
+        }}
+        handleShiftClick={index => {
+          handleMultiSelecteRow(correctIndex, index)
+        }}
+      />
+    )
   }
 
   const renderLibVirtualTable = (height, width) => {
@@ -94,19 +137,7 @@ export default React.memo(function List({ data }) {
             return null
           } else {
             const correctIndex = data.index - 1
-            return (
-              <Row
-                {...data}
-                correctIndex={correctIndex}
-                selected={selectedRow.includes(correctIndex)}
-                handleClick={index => {
-                  hadndleSelecteRow(correctIndex, index)
-                }}
-                handleShiftClick={index => {
-                  handleMultiSelecteRow(correctIndex, index)
-                }}
-              />
-            )
+            return renderRow(data.index, data.style, data.data, correctIndex)
           }
         }}
       </FixedSizeList>
@@ -126,21 +157,7 @@ export default React.memo(function List({ data }) {
           innerElementType={TableWrapper}
         >
           {value => {
-            return (
-              <Row
-                key={value.index}
-                data={data}
-                correctIndex={value.index}
-                style={value.style}
-                selected={selectedRow.includes(value.index)}
-                handleClick={index => {
-                  hadndleSelecteRow(value.index, index)
-                }}
-                handleShiftClick={index => {
-                  handleMultiSelecteRow(value.index, index)
-                }}
-              />
-            )
+            return renderRow(value.index, value.style, data, value.index)
           }}
         </CustomTable>
       )
@@ -157,21 +174,9 @@ export default React.memo(function List({ data }) {
         }}
       >
         <TableWrapper>
-          {data.map((user, index) => (
-            <Row
-              key={user.id}
-              correctIndex={index}
-              data={data}
-              style={{ height: '56px' }}
-              selected={selectedRow.includes(index)}
-              handleClick={rowIndex => {
-                hadndleSelecteRow(index, rowIndex)
-              }}
-              handleShiftClick={rowIndex => {
-                handleMultiSelecteRow(index, rowIndex)
-              }}
-            />
-          ))}
+          {data.map((user, index) =>
+            renderRow(user.id, { height: '56px' }, data, index)
+          )}
         </TableWrapper>
       </div>
     )

@@ -7,10 +7,6 @@ import styles from './style'
 
 export default function OtherSettings({ columns, offset = 0, data }) {
   const classes = styles()
-  const columnID = columns.map(
-    column => column.id !== 'checkbox' && column.display
-  )
-  console.log(columnID)
 
   const csvData = () => {
     return _.slice(

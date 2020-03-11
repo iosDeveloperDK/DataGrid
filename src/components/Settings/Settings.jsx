@@ -8,7 +8,6 @@ import OtherSettings from './others/OtherSettings'
 export default function Settings({ data }) {
   const { columns } = useSelector(state => state.settings)
   const { offset } = useSelector(state => state.table)
-  console.log(columns)
 
   return (
     <Grid container direction="column" style={{ padding: '16px' }} spacing={1}>

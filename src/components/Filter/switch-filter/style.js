@@ -17,6 +17,7 @@ const useStyles = makeStyles({
   },
   checked: {},
   label: {
+    fontWeight: '300 !important',
     color: `${theme.palette.primary.main} !important`
   }
 })
