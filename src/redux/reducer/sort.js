@@ -4,7 +4,7 @@ import {
 } from '../../config/constants'
 
 const defaultState = {
-  sort: JSON.parse(localStorage.getItem('sort') || '[]')
+  sort: []
 }
 
 export default (state = defaultState, { type, payload }) => {

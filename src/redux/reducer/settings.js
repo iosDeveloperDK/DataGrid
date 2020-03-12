@@ -74,7 +74,7 @@ const defaultState = {
       title: 'TEXT',
       type: 'text',
       sort: 'text',
-      width: '836px',
+      width: '850px',
       display: true
     }
   ]

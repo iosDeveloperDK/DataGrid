@@ -7,7 +7,6 @@ import OtherSettings from './others/OtherSettings'
 
 export default function Settings({ data }) {
   const { columns } = useSelector(state => state.settings)
-  const { offset } = useSelector(state => state.table)
 
   return (
     <Grid container direction="column" style={{ padding: '16px' }} spacing={1}>
@@ -23,7 +22,7 @@ export default function Settings({ data }) {
         <ColumnTransfer />
       </Grid>
       <Grid item sm={12} xs={12}>
-        <OtherSettings data={data} columns={columns} offset={offset} />
+        <OtherSettings data={data} columns={columns} />
       </Grid>
     </Grid>
   )

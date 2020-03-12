@@ -1,19 +1,14 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
-import _ from 'lodash'
 import { CSVLink } from 'react-csv'
 import { Link } from 'react-router-dom'
 import styles from './style'
 
-export default function OtherSettings({ columns, offset = 0, data }) {
+export default function OtherSettings({ columns, data }) {
   const classes = styles()
 
   const csvData = () => {
-    return _.slice(
-      data,
-      Math.floor(offset / 56),
-      13 + Math.floor(offset / 56)
-    ).map(user => ({
+    return data.map(user => ({
       ...user,
       isOnline: user.isOnline ? 'Yes' : 'No'
     }))
@@ -33,7 +28,6 @@ export default function OtherSettings({ columns, offset = 0, data }) {
       return (
         <Grid item sm={6} xs={6}>
           <CSVLink
-            key={csvColumns().length}
             className={classes.link}
             filename={'data-grid.csv'}
             data={csvData()}

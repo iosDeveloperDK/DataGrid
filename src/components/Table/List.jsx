@@ -3,7 +3,6 @@ import _ from 'lodash'
 import { FixedSizeList } from 'react-window'
 import Row from './row/Row'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeRowOffset } from '../../redux/action/table'
 import TableSnackbar from '../snackbar/TableSnackbar'
 import { deleteUsers, selectAllUsers } from '../../redux/action/users'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -27,6 +26,7 @@ export default React.memo(function List({ data }) {
       dispatch(selectAllUsers(0))
     }
   }, [selectedRows, data, dispatch])
+  console.log(selectedRow, selectedRowIndex)
 
   const deleteSlectedUsers = () => {
     setSelectRow([])
@@ -52,6 +52,7 @@ export default React.memo(function List({ data }) {
     if (selectedRow.includes(userId)) {
       _.pull(selectedRow, userId)
       setSelectRow([...selectedRow])
+      _.pull(selectedRowIndex, index)
       setSelectRowIndex([...selectedRowIndex])
     } else {
       let maxIndexValue = 0
@@ -121,9 +122,6 @@ export default React.memo(function List({ data }) {
   const renderLibVirtualTable = (height, width) => {
     return (
       <FixedSizeList
-        onScroll={scroll => {
-          dispatch(changeRowOffset(scroll.scrollOffset))
-        }}
         height={height}
         itemSize={56}
         overscanCount={30}
