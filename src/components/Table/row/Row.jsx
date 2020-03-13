@@ -29,6 +29,13 @@ export default React.memo(
               <Checkbox
                 className={!selected ? classes.icon : classes.iconSelected}
                 checked={selected}
+                onClick={event => {
+                  if (event.shiftKey) {
+                    handleShiftClick(correctIndex)
+                  } else {
+                    handleClick(correctIndex)
+                  }
+                }}
               />
             </div>
           )
@@ -129,13 +136,6 @@ export default React.memo(
         <div
           style={style}
           className={`${classes.row} ${selected && classes.rowSelected}`}
-          onClick={event => {
-            if (event.shiftKey) {
-              handleShiftClick(correctIndex)
-            } else {
-              handleClick(correctIndex)
-            }
-          }}
         >
           {columns
             .filter(column => column.display)

@@ -18,6 +18,7 @@ const defaultState = {
       title: 'AVATAR',
       type: 'text',
       width: '60px',
+      minWidth: 60,
       display: true
     },
     {
@@ -27,6 +28,7 @@ const defaultState = {
       sort: 'name',
       static: true,
       width: '180px',
+      minWidth: 180,
       display: true
     },
     {
@@ -35,6 +37,7 @@ const defaultState = {
       type: 'text',
       sort: 'car',
       width: '110px',
+      minWidth: 110,
       display: true
     },
     {
@@ -43,6 +46,7 @@ const defaultState = {
       type: 'text',
       sort: 'type',
       width: '80px',
+      minWidth: 80,
       display: true
     },
     {
@@ -51,6 +55,7 @@ const defaultState = {
       type: 'text',
       sort: 'price',
       width: '80px',
+      minWidth: 80,
       display: true
     },
     {
@@ -59,6 +64,7 @@ const defaultState = {
       type: 'text',
       sort: 'isOnline',
       width: '60px',
+      minWidth: 60,
       display: true
     },
     {
@@ -67,6 +73,7 @@ const defaultState = {
       type: 'text',
       sort: 'date',
       width: '100px',
+      minWidth: 100,
       display: true
     },
     {
@@ -75,6 +82,7 @@ const defaultState = {
       type: 'text',
       sort: 'text',
       width: '700px',
+      minWidth: 700,
       display: true
     }
   ]

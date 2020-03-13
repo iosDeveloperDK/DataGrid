@@ -19,10 +19,12 @@ const useStyles = makeStyles({
   },
   row: {
     userSelect: 'none',
+    cursor: 'pointer',
     display: 'flex',
     alignItems: 'center'
   },
   rowSelected: {
+    cursor: 'pointer',
     background: theme.palette.secondary.select,
     boxShadow: `0px 0px 10px 0px rgba(157,153,214,0.2)`,
     '& div': {

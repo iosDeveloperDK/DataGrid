@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from '../style'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -8,6 +8,7 @@ import {
 import _ from 'lodash'
 import HeaderTitle from './header-title/HeaderTitle'
 import HeaderSearchIcon from './header-search/HeaderSearchIcon'
+import ResizableColumn from './resizable-column/ResizableColumn'
 
 export default function Header({ style }) {
   const classes = styles()
@@ -56,6 +57,7 @@ export default function Header({ style }) {
             return (
               <div
                 key={data.title}
+                className="test"
                 style={{
                   position: data.static ? 'sticky' : 'relative',
                   left: '0px',
@@ -63,6 +65,7 @@ export default function Header({ style }) {
                 }}
               >
                 <div
+                  data-column={true}
                   className={`${classes.column}`}
                   style={{ width: data.width }}
                 >
@@ -77,6 +80,13 @@ export default function Header({ style }) {
                       )
                     }
                   />
+                  {data.minWidth && (
+                    <ResizableColumn
+                      id={data.id}
+                      columns={columns}
+                      minWidth={data.minWidth}
+                    />
+                  )}
                   {data.search && <HeaderSearchIcon {...data} />}
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import _ from 'lodash'
 import { FixedSizeList } from 'react-window'
 import Row from './row/Row'
@@ -15,8 +15,39 @@ export default React.memo(function List({ data }) {
   const [selectedRow, setSelectRow] = useState([])
   const [selectedRowIndex, setSelectRowIndex] = useState([])
   const { selectedRows } = useSelector(state => state.data)
+  const tableRef = useRef()
 
   useEffect(() => {
+    if (tableRef.current) {
+      let isDown = false
+      let startX
+      let scrollLeft
+      const slider = tableRef.current
+
+      slider.addEventListener('mousedown', e => {
+        if (e.target.dataset.column) return
+
+        isDown = true
+        startX = e.pageX - slider.offsetLeft
+        scrollLeft = slider.scrollLeft
+      })
+      slider.addEventListener('mouseleave', () => {
+        isDown = false
+        slider.classList.remove('active')
+      })
+      slider.addEventListener('mouseup', () => {
+        isDown = false
+        slider.classList.remove('active')
+      })
+      slider.addEventListener('mousemove', e => {
+        if (!isDown) return
+        e.preventDefault()
+        const x = e.pageX - slider.offsetLeft
+        const walk = (x - startX) * 1 //scroll-fast
+        slider.scrollLeft = scrollLeft - walk
+      })
+    }
+
     if (selectedRows === 1) {
       setSelectRow(data.map(user => user.id))
       setSelectRowIndex(_.range(data.length))
@@ -26,7 +57,6 @@ export default React.memo(function List({ data }) {
       dispatch(selectAllUsers(0))
     }
   }, [selectedRows, data, dispatch])
-  console.log(selectedRow, selectedRowIndex)
 
   const deleteSlectedUsers = () => {
     setSelectRow([])
@@ -122,10 +152,19 @@ export default React.memo(function List({ data }) {
   const renderLibVirtualTable = (height, width) => {
     return (
       <FixedSizeList
+        outerRef={tableRef}
         height={height}
         itemSize={56}
         overscanCount={30}
-        innerElementType={TableWrapper}
+        innerElementType={test => {
+          return (
+            <TableWrapper
+              // ref={tableRef}
+              children={test.children}
+              style={test.style}
+            />
+          )
+        }}
         itemCount={data.length + 1}
         width={width}
         itemData={{ ...data }}
@@ -146,6 +185,7 @@ export default React.memo(function List({ data }) {
     return (
       data.length && (
         <CustomTable
+          // ref={tableRef}
           itemCount={data.length}
           rowHeight={56}
           overscanCount={12}
@@ -185,7 +225,6 @@ export default React.memo(function List({ data }) {
       <AutoSizer>
         {({ height, width }) =>
           (() => {
-            console.log(height)
             switch (virtualization) {
               case 0:
                 return renderLibVirtualTable(height, width)
