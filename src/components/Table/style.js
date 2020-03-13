@@ -5,10 +5,9 @@ const useStyles = makeStyles({
   header: {
     display: 'flex',
     alignItems: 'center',
-    height: '56px',
+    width: '100%',
     top: 0,
     color: `${theme.palette.primary.main}`,
-    borderBottom: `1px solid ${theme.palette.primary.main}40`,
     '& div p': {
       fontSize: '11px'
     },
@@ -16,6 +15,8 @@ const useStyles = makeStyles({
   },
   column: {
     display: 'flex',
+    height: '56px',
+    borderBottom: `1px solid ${theme.palette.primary.main}40`,
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(0, 1),

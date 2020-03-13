@@ -49,7 +49,7 @@ export default function Header({ style }) {
 
   return (
     <>
-      <div style={style} className={`${classes.header} `}>
+      <div style={style} className={`${classes.header} sticky`}>
         {columns
           .filter(column => column.display)
           .map(data => {

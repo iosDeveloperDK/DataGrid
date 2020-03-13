@@ -185,6 +185,7 @@ export default React.memo(function List({ data }) {
       <AutoSizer>
         {({ height, width }) =>
           (() => {
+            console.log(height)
             switch (virtualization) {
               case 0:
                 return renderLibVirtualTable(height, width)

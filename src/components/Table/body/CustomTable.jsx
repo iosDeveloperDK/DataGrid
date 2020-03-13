@@ -22,19 +22,22 @@ export default function CustomTable({
 
   const scroll = useCallback(() => {
     if (containerRef.current) {
-      const { scrollTop } = containerRef.current
-      const index = Math.floor((scrollTop + height) / rowHeight)
-      const indexes = _.range(
-        Math.min(index + overscanCount - topOffsetRow, itemCount)
-      )
-
-      if (indexes.length >= visibleRowsCount + overscanCount + topOffsetRow) {
-        const length = indexes.length
-        setRowIndexes(
-          _.slice(indexes, length - visibleRowsCount - overscanCount, length)
+      const { scrollTop, scrollLeft } = containerRef.current
+      if (scrollLeft === 0) {
+        const index = Math.floor((scrollTop + height) / rowHeight)
+        const indexes = _.range(
+          Math.min(index + overscanCount - topOffsetRow, itemCount)
         )
+        if (indexes.length >= visibleRowsCount + overscanCount + topOffsetRow) {
+          const length = indexes.length
+          setRowIndexes(
+            _.slice(indexes, length - visibleRowsCount - overscanCount, length)
+          )
+        } else {
+          setRowIndexes(indexes)
+        }
       } else {
-        setRowIndexes(indexes)
+        return
       }
     }
   }, [height, itemCount, overscanCount, rowHeight, visibleRowsCount])
