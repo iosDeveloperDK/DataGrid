@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import styles from '../style'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -57,7 +57,6 @@ export default function Header({ style }) {
             return (
               <div
                 key={data.title}
-                className="test"
                 style={{
                   position: data.static ? 'sticky' : 'relative',
                   left: '0px',

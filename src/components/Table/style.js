@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   header: {
     display: 'flex',
     alignItems: 'center',
-    width: '100%',
+    // position: 'absolute !important',
     top: 0,
     color: `${theme.palette.primary.main}`,
     '& div p': {

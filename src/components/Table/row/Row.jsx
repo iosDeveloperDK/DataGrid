@@ -134,7 +134,10 @@ export default React.memo(
     return (
       user && (
         <div
-          style={style}
+          style={{
+            top: style.top,
+            position: style.position
+          }}
           className={`${classes.row} ${selected && classes.rowSelected}`}
         >
           {columns

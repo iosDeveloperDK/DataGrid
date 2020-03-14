@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { FixedSizeList } from 'react-window'
 import Row from './row/Row'
@@ -8,6 +8,7 @@ import { deleteUsers, selectAllUsers } from '../../redux/action/users'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import CustomTable from './body/CustomTable'
 import TableWrapper from './body/TableWrapper'
+import ScrollableBody from './body/ScrollableBody'
 
 export default React.memo(function List({ data }) {
   const dispatch = useDispatch()
@@ -15,39 +16,8 @@ export default React.memo(function List({ data }) {
   const [selectedRow, setSelectRow] = useState([])
   const [selectedRowIndex, setSelectRowIndex] = useState([])
   const { selectedRows } = useSelector(state => state.data)
-  const tableRef = useRef()
 
   useEffect(() => {
-    if (tableRef.current) {
-      let isDown = false
-      let startX
-      let scrollLeft
-      const slider = tableRef.current
-
-      slider.addEventListener('mousedown', e => {
-        if (e.target.dataset.column) return
-
-        isDown = true
-        startX = e.pageX - slider.offsetLeft
-        scrollLeft = slider.scrollLeft
-      })
-      slider.addEventListener('mouseleave', () => {
-        isDown = false
-        slider.classList.remove('active')
-      })
-      slider.addEventListener('mouseup', () => {
-        isDown = false
-        slider.classList.remove('active')
-      })
-      slider.addEventListener('mousemove', e => {
-        if (!isDown) return
-        e.preventDefault()
-        const x = e.pageX - slider.offsetLeft
-        const walk = (x - startX) * 1 //scroll-fast
-        slider.scrollLeft = scrollLeft - walk
-      })
-    }
-
     if (selectedRows === 1) {
       setSelectRow(data.map(user => user.id))
       setSelectRowIndex(_.range(data.length))
@@ -151,72 +121,77 @@ export default React.memo(function List({ data }) {
 
   const renderLibVirtualTable = (height, width) => {
     return (
-      <FixedSizeList
-        outerRef={tableRef}
-        height={height}
-        itemSize={56}
-        overscanCount={30}
-        innerElementType={test => {
-          return (
-            <TableWrapper
-              // ref={tableRef}
-              children={test.children}
-              style={test.style}
-            />
-          )
-        }}
-        itemCount={data.length + 1}
-        width={width}
-        itemData={{ ...data }}
-      >
-        {data => {
-          if (data.index === 0) {
-            return null
-          } else {
-            const correctIndex = data.index - 1
-            return renderRow(data.index, data.style, data.data, correctIndex)
-          }
-        }}
-      </FixedSizeList>
+      <ScrollableBody path="outerRef" key={0}>
+        <FixedSizeList
+          height={height}
+          itemSize={56}
+          overscanCount={30}
+          innerElementType={test => {
+            return <TableWrapper children={test.children} style={test.style} />
+          }}
+          itemCount={data.length + 1}
+          width={width}
+          itemData={{ ...data }}
+        >
+          {data => {
+            if (data.index === 0) {
+              return null
+            } else {
+              const correctIndex = data.index - 1
+              return renderRow(data.index, data.style, data.data, correctIndex)
+            }
+          }}
+        </FixedSizeList>
+      </ScrollableBody>
     )
   }
 
   const renderCustomVirtualTable = (height, width) => {
     return (
       data.length && (
-        <CustomTable
-          // ref={tableRef}
-          itemCount={data.length}
-          rowHeight={56}
-          overscanCount={12}
-          height={height}
-          width={width}
-          offsetTop={56}
-          innerElementType={TableWrapper}
-        >
-          {value => {
-            return renderRow(value.index, value.style, data, value.index)
-          }}
-        </CustomTable>
+        <ScrollableBody path="ref" key={1}>
+          <div style={{ width: width, height: height }}>
+            <CustomTable
+              itemCount={data.length}
+              rowHeight={56}
+              overscanCount={12}
+              height={height}
+              width={width}
+              offsetTop={56}
+              innerElementType={TableWrapper}
+            >
+              {value => {
+                return renderRow(value.index, value.style, data, value.index)
+              }}
+            </CustomTable>
+          </div>
+        </ScrollableBody>
       )
     )
   }
 
   const renderSimpleTable = (height, width) => {
     return (
-      <div
-        style={{
-          height: `${height}px`,
-          width: `${width}px`,
-          overflowY: 'scroll'
-        }}
-      >
-        <TableWrapper>
-          {data.map((user, index) =>
-            renderRow(user.id, { height: '56px' }, data, index)
-          )}
-        </TableWrapper>
-      </div>
+      <ScrollableBody path="ref" key={2}>
+        <div
+          style={{
+            height: `${height}px`,
+            width: `${width}px`,
+            overflowY: 'scroll'
+          }}
+        >
+          <TableWrapper>
+            {data.map((user, index) =>
+              renderRow(
+                user.id,
+                { height: '56px', position: 'static !important' },
+                data,
+                index
+              )
+            )}
+          </TableWrapper>
+        </div>
+      </ScrollableBody>
     )
   }
 
