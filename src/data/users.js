@@ -31,4 +31,4 @@ const makeData = id => {
   }
 }
 
-export default [...new Array(200)].map((_, id) => makeData(id))
+export default [...new Array(3000)].map((_, id) => makeData(id))
